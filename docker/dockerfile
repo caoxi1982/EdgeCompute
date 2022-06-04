@@ -1,0 +1,4 @@
+FROM openjdk:8u332-jdk-bullseye
+ADD influxdb-1.0-SNAPSHOT.jar /test.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/test.jar"]
