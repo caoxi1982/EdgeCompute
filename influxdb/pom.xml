@@ -7,6 +7,7 @@
   <groupId>com.ra.demo.plc4x</groupId>
   <artifactId>influxdb</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <name>influxdb</name>
   <!-- FIXME change it to the project's website -->
@@ -14,8 +15,11 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+<!--    <maven.compiler.source>11</maven.compiler.source>-->
+<!--    <maven.compiler.target>11</maven.compiler.target>-->
+    <!--    <maven.compiler.release>11</maven.compiler.release>-->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -72,42 +76,65 @@
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.4.1</version>
+          <artifactId>maven-jar-plugin</artifactId>
           <configuration>
-            <!-- get all project dependencies -->
-            <descriptorRefs>
-              <descriptorRef>jar-with-dependencies</descriptorRef>
-            </descriptorRefs>
-            <!-- MainClass in mainfest make a executable jar -->
             <archive>
               <manifest>
-                <mainClass>com.ra.demo.plc4x.App</mainClass>
+                <addClasspath>true</addClasspath>
+                <classpathPrefix>libs/</classpathPrefix>
+                <mainClass>
+                  com.ra.demo.plc4x.App
+                </mainClass>
               </manifest>
             </archive>
-
           </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
           <executions>
             <execution>
-              <id>make-assembly</id>
-              <!-- bind to the packaging phase -->
-              <phase>package</phase>
+              <id>copy-dependencies</id>
+              <phase>prepare-package</phase>
               <goals>
-                <goal>single</goal>
+                <goal>copy-dependencies</goal>
               </goals>
+              <configuration>
+                <outputDirectory>
+                  ${project.build.directory}/libs
+                </outputDirectory>
+              </configuration>
             </execution>
           </executions>
         </plugin>
 <!--        <plugin>-->
-<!--          <artifactId>maven-jar-plugin</artifactId>-->
-<!--          <version>3.0.2</version>-->
-<!--            <configuration>-->
-<!--                <archive>-->
-<!--                    <manifest>-->
-<!--                        <mainClass>com.ra.demo.plc4x.App</mainClass>-->
-<!--                    </manifest>-->
-<!--                </archive>-->
-<!--            </configuration>-->
+<!--          <groupId>org.apache.maven.plugins</groupId>-->
+<!--          <artifactId>maven-assembly-plugin</artifactId>-->
+<!--          <version>3.3.0</version>-->
+<!--          <configuration>-->
+<!--            &lt;!&ndash; get all project dependencies &ndash;&gt;-->
+<!--            <descriptorRefs>-->
+<!--              <descriptorRef>jar-with-dependencies</descriptorRef>-->
+<!--            </descriptorRefs>-->
+<!--            &lt;!&ndash; MainClass in mainfest make a executable jar &ndash;&gt;-->
+<!--            <archive>-->
+<!--              <manifest>-->
+<!--                <mainClass>com.ra.demo.plc4x.App</mainClass>-->
+<!--              </manifest>-->
+<!--            </archive>-->
+<!--            <appendAssemblyId>true</appendAssemblyId>-->
+<!--          </configuration>-->
+<!--          <executions>-->
+<!--            <execution>-->
+<!--              <id>make-assembly</id>-->
+<!--              &lt;!&ndash; bind to the packaging phase, here why I can not bind ,and always need command assembly:single &ndash;&gt;-->
+<!--              <phase>package</phase>-->
+<!--              <goals>-->
+<!--                <goal>single</goal>-->
+<!--              </goals>-->
+<!--            </execution>-->
+<!--          </executions>-->
 <!--        </plugin>-->
       </plugins>
     </pluginManagement>

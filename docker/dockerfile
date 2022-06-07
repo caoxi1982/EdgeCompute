@@ -1,4 +1,5 @@
-FROM openjdk:8u332-jdk-bullseye
-ADD influxdb-1.0-SNAPSHOT.jar /test.jar
+FROM openjdk:11.0.15
+RUN apt update && apt install inetutils-ping
+COPY . /var/lib
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/test.jar"]
+ENTRYPOINT [ "java","-jar","/var/lib/influxdb-1.0-SNAPSHOT.jar" ]

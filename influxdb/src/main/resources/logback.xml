@@ -22,7 +22,7 @@
 	<logger name="io.netty" level="WARN"/>
 	<logger name="com.ra.demo.plc4x.App"	 level="DEBUG"/>
 
-	<root level="TRACE">
+	<root level="DEBUG">
 		<appender-ref ref="ROLLING" />
 		<appender-ref ref="STDOUT" />
 	</root>
