@@ -1,0 +1,30 @@
+{
+  "url": "http://influx:8086",
+  "org": "ra",
+  "token": "U0pdAvYrUbJMPvnD8YZjkm9d8KCVHpeBEe1_LiVlQImsr98ERFRrYKge1hsZVeht_VfEAixTkgsAi6B85lax-Q==",
+  "bucket": "test",
+
+  "connection": "eip://192.168.1.11?backplane=1",
+  "plcTags": [
+    {
+      "name": "a_sin[0]",
+      "length": 2,
+      "iTags": { "name1": "a1", "name2": "a2" }
+    },
+    {
+      "name": "a_sin[50]",
+      "length": 2,
+      "iTags": { "name1": "a1", "name2": "a2" }
+    },
+    {
+      "name": "a_sin[100]",
+      "length": 2,
+      "iTags": { "name1": "a1", "name2": "a2" }
+    },
+    {
+      "name": "a_sin[150]",
+      "length": 2,
+      "iTags": { "name1": "a1", "name2": "a2" }
+    }
+  ]
+}
