@@ -21,7 +21,7 @@ services:
     networks:
       bridge:
         ipv4_address: 172.16.0.2
-  telegraf:
+  opcua:
     image: telegraf:1.23.0
     container_name: telegraf
     extra_hosts:

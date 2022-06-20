@@ -26,4 +26,5 @@ hs_err_pid*
 .idea/
 .vscode/
 influxdb/target/
+docker/libs
 
