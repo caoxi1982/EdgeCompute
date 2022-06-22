@@ -1,8 +1,9 @@
 package com.ra.demo.influxdb;
 
-import com.influxdb.client.WriteApiBlocking;
+import com.influxdb.client.WriteApi;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.client.write.Point;
+import com.ra.demo.config.Plc;
 import org.apache.plc4x.java.api.messages.PlcReadRequest;
 import org.apache.plc4x.java.api.messages.PlcReadResponse;
 import org.apache.plc4x.java.api.types.PlcResponseCode;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -19,11 +21,9 @@ import java.util.concurrent.ExecutionException;
 @DisallowConcurrentExecution
 public class InfluxDBJob implements Job {
     private static Logger log = LoggerFactory.getLogger(InfluxDBJob.class);
-	private static String ORG = "influx_org";
-	private static String BUCKET = "influx_bucket";
-
-	private static String INFLUX_HANDLE = "influx";
-	private static String DRIVER = "driver";
+	private static String INFLUX_WRITE_API = "influx";
+	private static String PLC_TAG_CONFIG = "tagConfig";
+	private static String CIP_DRIVER = "driver";
 
     public InfluxDBJob() {}
 
@@ -31,12 +31,11 @@ public class InfluxDBJob implements Job {
 		long starttime = System.currentTimeMillis();
 		JobKey jobKey = context.getJobDetail().getKey();
 		try {
-			JobDataMap datas = context.getJobDetail().getJobDataMap();
-			PlcReadRequest readRequest = (PlcReadRequest) datas.get(DRIVER);
-			WriteApiBlocking writeApi = (WriteApiBlocking) datas.get(INFLUX_HANDLE);
-			String org = (String) datas.get(ORG);
-			String bucket = (String) datas.get(BUCKET);
-			WriteResponse(writeApi,readRequest,org,bucket);
+			JobDataMap dataMap = context.getJobDetail().getJobDataMap();
+			PlcReadRequest readRequest = (PlcReadRequest) dataMap.get(CIP_DRIVER);
+			WriteApi writeApi = (WriteApi) dataMap.get(INFLUX_WRITE_API);
+			Plc plcConfig = (Plc) dataMap.get(PLC_TAG_CONFIG);
+			WriteResponse(writeApi,readRequest,plcConfig);
 			long endtime = System.currentTimeMillis();
 			log.info("InfluxDBJob says: " + jobKey + " executing at " + new Date() + "Duration is {} ms",
 				(endtime - starttime));
@@ -45,30 +44,31 @@ public class InfluxDBJob implements Job {
 		}
     }
 
-    private void writePoint(WriteApiBlocking writeApi,String measurement,String org,String bucket,Map<String, String> tags, Map<String, Object> field) {
+    private void writePoint(WriteApi writeApi,String measurement,Map<String, String> tags, Map<String, Object> field) {
 		Point point = Point.measurement(measurement).addTags(tags).addFields(field).time(Instant.now(),
 			WritePrecision.MS);
-		writeApi.writePoint(bucket, org, point);
+		writeApi.writePoint(point);
     }
 
-    private void writePoint(WriteApiBlocking writeApi,String measurement,String org,String bucket,String tagName, String tagValue, String fieldName, float fieldValue) {
+    private void writePoint(WriteApi writeApi,String measurement,String tagName, String tagValue, String fieldName, float fieldValue) {
 		Point point = Point.measurement(measurement).addTag(tagName, tagValue).addField(fieldName, fieldValue)
 			.time(Instant.now(), WritePrecision.MS);
-		writeApi.writePoint(bucket, org, point);
+		writeApi.writePoint(point);
     }
 
-    private void WriteResponse(WriteApiBlocking writeApi,PlcReadRequest request,String org,String bucket) {
+    private void WriteResponse(WriteApi writeApi,PlcReadRequest request,Plc plcCfg) {
 		//////////////////////////////////////////////////////////
 		// Read synchronously ...
 		// NOTICE: the ".get()" immediately lets this thread pause until
 		// the response is processed and available.
 		log.info("Synchronous request ...");
-		PlcReadResponse syncResponse;
 		try {
-			syncResponse = request.execute().get();
+			PlcReadResponse syncResponse = request.execute().get();
+			Map<String, Object> field = new HashMap<String, Object>();
 			for (String fieldName : syncResponse.getFieldNames()) {
 				if (syncResponse.getResponseCode(fieldName) == PlcResponseCode.OK) {
-					writePoint(writeApi,"SimpleTest",org,bucket, "plc", "controller", fieldName, syncResponse.getFloat(fieldName));
+					field.put(fieldName, syncResponse.getFloat(fieldName));
+					writePoint(writeApi,plcCfg.getMeasurement(),plcCfg.getPlcTag(fieldName).getInfluxTags(),field);
 					log.info("InfluxDBJob says: executing at " + new Date()	+ "write to influxdb measurement={},tag={},field={},value={}",
 						"plc4x", "controller", fieldName, syncResponse.getFloat(fieldName));
 				}

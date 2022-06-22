@@ -2,19 +2,24 @@ package com.ra.demo.influxdb;
 
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.InfluxDBClientFactory;
-import com.influxdb.client.WriteApiBlocking;
+import com.influxdb.client.WriteApi;
+import com.influxdb.client.WriteOptions;
 import com.ra.demo.config.Config;
+import com.ra.demo.config.Plc;
 import com.ra.demo.config.PlcTag;
 import org.apache.plc4x.java.PlcDriverManager;
 import org.apache.plc4x.java.api.PlcConnection;
 import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
 import org.apache.plc4x.java.api.messages.PlcReadRequest;
+import org.jetbrains.annotations.NotNull;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static org.quartz.JobBuilder.newJob;
@@ -28,23 +33,17 @@ import static org.quartz.TriggerBuilder.newTrigger;
  * @author Bill Kratzer
  */
 public class SimpleTriggerExample {
-
-	private String url;
-	private String org;
-	private String bucket;
-	private String token;
-
-	private InfluxDBClient client;
-	private WriteApiBlocking writeApi;
-	private PlcConnection plcConnection;
-	private PlcReadRequest readRequest;
-	private static String ORG = "influx_org";
-	private static String BUCKET = "influx_bucket";
-    private static String INFLUX_HANDLE= "influx";
-    private static String DRIVER = "driver";
-    private static Logger log = LoggerFactory.getLogger(SimpleTriggerExample.class);
+	private Map<String,WriteApi> writeApiMap = new HashMap<>();
+	private Map<String,PlcConnection> plcConnectionMap = new HashMap<>();
+	private Map<String,PlcReadRequest> plcReadRequestMap = new HashMap<>();
+	private Map<String,Plc> plcConfigMap = new HashMap<>();
+	private static final String PLC_TAG_CONFIG = "tagConfig";
+    private static final String INFLUX_WRITE_API= "influx";
+    private static final String CIP_DRIVER = "driver";
+    private static final Logger log = LoggerFactory.getLogger(SimpleTriggerExample.class);
 	private boolean exit = true;
     public void run(Config cfg){
+		clearAllMap();
 		initialInfluxdb(cfg);
 		initialCIPDriver(cfg);
 		try {
@@ -54,21 +53,24 @@ public class SimpleTriggerExample {
 			Scheduler sched = sf.getScheduler();
 			log.info("------- Initialization Complete --------");
 			log.info("------- Scheduling Jobs ----------------");
-			// jobs can be scheduled before sched.start() has been called
-			// get a "nice round" time a few seconds in the future...
-			Date startTime = DateBuilder.nextGivenSecondDate(null, 15);
-			JobDetail job = newJob(InfluxDBJob.class).withIdentity("jobInflux", "group1").build();
-			job.getJobDataMap().put(DRIVER, readRequest);
-			job.getJobDataMap().put(ORG, cfg.getORG());
-			job.getJobDataMap().put(BUCKET, cfg.getBucket());
-			job.getJobDataMap().put(INFLUX_HANDLE, writeApi);
-			SimpleTrigger trigger = newTrigger().withIdentity("trigger1", "group1").startAt(startTime)
-				.withSchedule(simpleSchedule().withIntervalInMilliseconds(2000).repeatForever()).build();
-			Date ft = sched.scheduleJob(job, trigger);
-			log.info(job.getKey() + " will run at: " + ft + " and repeat: forever times, every "
-				+ trigger.getRepeatInterval() / 1000 + " seconds");
+			// Create and schedule jobs ,they can not be execute before call start()
+			for(Plc plc : cfg.getPlcs()){
+				String measure = plc.getMeasurement();
+				int interval = plc.getInterval();
+				String jobName = "InfluxDB_" + measure + String.valueOf(interval);
+				Date startTime = DateBuilder.nextGivenSecondDate(null, 15);
+				JobDetail job = newJob(InfluxDBJob.class).withIdentity(jobName, measure).build();
+				job.getJobDataMap().put(PLC_TAG_CONFIG, plcConfigMap.get(measure));
+				job.getJobDataMap().put(INFLUX_WRITE_API, writeApiMap.get(measure));
+				job.getJobDataMap().put(CIP_DRIVER, plcReadRequestMap.get(measure));
+				SimpleTrigger trigger = newTrigger().withIdentity(jobName, measure).startAt(startTime)
+						.withSchedule(simpleSchedule().withIntervalInMilliseconds(interval).repeatForever()).build();
+				Date ft = sched.scheduleJob(job, trigger);
+				log.info(job.getKey() + " will run at: " + ft + " and repeat: forever times, every "
+						+ trigger.getRepeatInterval() + " ms");
+			};
 			log.info("------- Starting Scheduler ----------------");
-			// All of the jobs have been added to the scheduler, but none of the jobs
+			// All the jobs have been added to the scheduler, but none of the jobs
 			// will run until the scheduler has been started
 			sched.start();
 			log.info("------- Started Scheduler -----------------");
@@ -88,48 +90,71 @@ public class SimpleTriggerExample {
 			SchedulerMetaData metaData = sched.getMetaData();
 			log.info("Executed " + metaData.getNumberOfJobsExecuted() + " jobs.");
 			log.info("------- EIP drivers Shutdowning  -----------------");
-			plcConnection.close();
-			client.close();
+			writeApiMap.values().forEach(writeApi -> writeApi.close());
+			plcConnectionMap.values().forEach(plcConnection -> {
+				try {
+					plcConnection.close();
+				} catch (Exception e) {
+					log.error(e.getMessage());
+				}
+			});
 		}
 //		catch (InterruptedException e) {
 //		}
 		catch (SchedulerException e){
 			log.error(e.getMessage());
+			clearAllMap();
 		}
 		catch(Exception e){
 			log.error(e.getMessage());
+			clearAllMap();
 		}
+		clearAllMap();
 		System.exit(0);
     }
 
 	private void initialInfluxdb(Config cfg){
-		this.url = cfg.getURL();
-		this.org = cfg.getORG();
-		this.bucket = cfg.getBucket();
-		this.token = cfg.getToken();
-		this.client = InfluxDBClientFactory.create(url, token.toCharArray());
-		this.writeApi = client.getWriteApiBlocking();
+		InfluxDBClient client = InfluxDBClientFactory.create(cfg.getURL(), cfg.getToken().toCharArray(),cfg.getORG(),cfg.getBucket());
+		cfg.getPlcs().forEach((plc) ->{
+			WriteApi writeApi = client.makeWriteApi(WriteOptions.builder().batchSize(2000).flushInterval(10000).jitterInterval(3000).bufferLimit(100000).build());
+			writeApiMap.put(plc.getMeasurement(),writeApi);
+			plcConfigMap.put(plc.getMeasurement(),plc);
+		});
 	}
-	private void initialCIPDriver(Config cfg){
-		try {
-			// --connection-string eip://192.168.1.11?backplane=1 --field-addresses %aa
-			plcConnection = new PlcDriverManager().getConnection(cfg.getConnection());
-			// Check if this connection support reading of data.
-			if (!plcConnection.getMetadata().canRead()) {
-				log.error("This connection doesn't support reading.");
-				return;
+	private void initialCIPDriver(@NotNull Config cfg){
+		// --connection-string eip://192.168.1.11?backplane=1 --field-addresses %aa
+		cfg.getPlcs().forEach((plc) -> {
+			try {
+				PlcConnection plcConnection = new PlcDriverManager().getConnection(plc.getConnection());
+				// Check if this connection support reading of data.
+				if (!plcConnection.getMetadata().canRead()) {
+					log.error("This connection doesn't support reading.");
+					return;
+				}
+				// Create a new read request:
+				PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
+				// The different is Array be parsed as one Item or an Array of Items
+				if (cfg.isDebug()) {
+					for (PlcTag tag : plc.getPlcTags()) {
+						builder.addItem(tag.getName(), tag.getItemName(true));
+					}
+				}else{
+					for (PlcTag tag : plc.getPlcTags()) {
+						builder.addItem(tag.getName(), tag.getItemName());
+					}
+				}
+				PlcReadRequest readRequest = builder.build();
+				plcConnectionMap.put(plc.getMeasurement(), plcConnection);
+				plcReadRequestMap.put(plc.getMeasurement(), readRequest);
+			}catch (PlcConnectionException e) {
+				//
 			}
-			// Create a new read request:
-			// - Give the single item requested the alias name "value"
-			PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
-			for (PlcTag tag:cfg.getTags()) {
-				builder.addItem(tag.getName(), tag.getItemName());
-			}
-			readRequest = builder.build();
-		}
-		catch (PlcConnectionException e) {
-			//
-		}
+		});
 	}
-
+	private void clearAllMap(){
+		writeApiMap.clear();
+		plcConnectionMap.clear();
+		plcReadRequestMap.clear();
+		plcConfigMap.clear();
+	}
 }

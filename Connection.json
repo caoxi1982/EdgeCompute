@@ -3,7 +3,7 @@
   "org": "ra",
   "token": "U0pdAvYrUbJMPvnD8YZjkm9d8KCVHpeBEe1_LiVlQImsr98ERFRrYKge1hsZVeht_VfEAixTkgsAi6B85lax-Q==",
   "bucket": "test",
-
+  "debug": true,
   "connection": "eip://192.168.1.11?backplane=1",
   "plcTags": [
     {
