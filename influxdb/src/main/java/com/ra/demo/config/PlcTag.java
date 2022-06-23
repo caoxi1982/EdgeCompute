@@ -30,12 +30,7 @@ public class PlcTag {
         }
     }
     public String getName() {
-        if (length == 1) {
-            return name;
-        } else if (length > 1) {
-            return name + "[0]";
-        }
-        return null;
+        return name;
     }
 
     public int getLength() {
@@ -69,7 +64,4 @@ public class PlcTag {
     public String toString() {
         return "\n" + this.getItemName() + ",influxTags = " + influxTags.toString();
     }
-
-
-
 }

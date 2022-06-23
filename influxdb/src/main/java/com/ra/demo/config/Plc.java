@@ -1,8 +1,8 @@
 package com.ra.demo.config;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Plc {
 
@@ -12,14 +12,16 @@ public class Plc {
     private final String measurement;
 
     private final PlcTag[] plcTags;
-    private List<PlcTag> plcTags_debug;
+    private boolean debug = false;
+
+    private Map<String,PlcTag> plcTagsMap,plcTagsMap_debug;
+
     public Plc(String connection, int interval, String measurement,PlcTag[] plcTags) {
         this.connection = connection;
         this.interval = interval;
         this.plcTags = plcTags;
         this.measurement = measurement;
     }
-
     public String getConnection() {
         return connection;
     }
@@ -27,31 +29,55 @@ public class Plc {
     public int getInterval() {
         return interval;
     }
+
+    public boolean isDebug() {
+        return debug;
+    }
+
+    private void setDebug(boolean debug) {
+        this.debug = debug;
+    }
+
     public String getMeasurement() {
         return measurement;
     }
-    public List<PlcTag> getPlcTags() {
-        return Arrays.asList(plcTags);
+    public synchronized Map<String,PlcTag> getPlcTags() {
+        if (debug) {
+            return plcTagsMap_debug;
+        }else {
+            return plcTagsMap;
+        }
     }
-    public PlcTag getPlcTag(String name) {
-        // Maybe a Map be initialed at the beginning is better
-        return getPlcTags().stream().filter(plcTag -> plcTag.getName() == name).findFirst().get();
-    }
-
-    List<PlcTag> generateDebugTags(){
-        List<PlcTag> tagList = getPlcTags();
-        List<PlcTag> debugTagList = new ArrayList<>();
-        if (tagList != null){
-            for(PlcTag pt : tagList){
-                if (pt.getLength() > 1) {
-                    debugTagList.addAll(pt.flat());
-                }else if (pt.getLength() == 1) {
-                    debugTagList.add(pt);
-                }
+    synchronized Map<String,PlcTag> createDebugTags(){
+        // Initialize the debug mode of this PLC
+        setDebug(true);
+        Map<String,PlcTag> tagMap = createPlcTagsMap();
+        Map<String,PlcTag> debugTagMap = new HashMap<>();
+        for(Map.Entry<String,PlcTag> entry : tagMap.entrySet()){
+            if (entry.getValue().getLength() > 1) {
+                entry.getValue().flat().forEach(t -> debugTagMap.put(t.getName(),t));
+            }else if (entry.getValue().getLength() == 1) {
+                debugTagMap.put(entry.getKey(),entry.getValue());
             }
         }
-        plcTags_debug = debugTagList;
-        return debugTagList;
+        plcTagsMap_debug = debugTagMap;
+        return plcTagsMap_debug;
+    }
+    synchronized Map<String,PlcTag> createPlcTagsMap() {
+        if (plcTagsMap == null){
+            plcTagsMap =  new HashMap<String,PlcTag>();
+            for(PlcTag tag : Arrays.asList(plcTags)) {
+                plcTagsMap.put(tag.getName(),tag);
+            }
+        }
+        return plcTagsMap;
+    }
+    public PlcTag getPlcTag(String name) {
+        if (debug) {
+            return plcTagsMap_debug.get(name);
+        }else {
+            return plcTagsMap.get(name);
+        }
     }
 
     @Override

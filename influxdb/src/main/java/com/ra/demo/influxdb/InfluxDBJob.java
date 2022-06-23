@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -32,10 +33,10 @@ public class InfluxDBJob implements Job {
 		JobKey jobKey = context.getJobDetail().getKey();
 		try {
 			JobDataMap dataMap = context.getJobDetail().getJobDataMap();
-			PlcReadRequest readRequest = (PlcReadRequest) dataMap.get(CIP_DRIVER);
+			HashSet<PlcReadRequest> requestSet = (HashSet<PlcReadRequest>) dataMap.get(CIP_DRIVER);
 			WriteApi writeApi = (WriteApi) dataMap.get(INFLUX_WRITE_API);
 			Plc plcConfig = (Plc) dataMap.get(PLC_TAG_CONFIG);
-			WriteResponse(writeApi,readRequest,plcConfig);
+			WriteResponse(writeApi,requestSet,plcConfig);
 			long endtime = System.currentTimeMillis();
 			log.info("InfluxDBJob says: " + jobKey + " executing at " + new Date() + "Duration is {} ms",
 				(endtime - starttime));
@@ -56,25 +57,27 @@ public class InfluxDBJob implements Job {
 		writeApi.writePoint(point);
     }
 
-    private void WriteResponse(WriteApi writeApi,PlcReadRequest request,Plc plcCfg) {
+    private void WriteResponse(WriteApi writeApi,HashSet<PlcReadRequest> requestSet,Plc plcCfg) {
 		//////////////////////////////////////////////////////////
 		// Read synchronously ...
 		// NOTICE: the ".get()" immediately lets this thread pause until
 		// the response is processed and available.
-		log.info("Synchronous request ...");
+		log.debug("Synchronous request data ,then write to influxdb");
 		try {
-			PlcReadResponse syncResponse = request.execute().get();
-			Map<String, Object> field = new HashMap<String, Object>();
-			for (String fieldName : syncResponse.getFieldNames()) {
-				if (syncResponse.getResponseCode(fieldName) == PlcResponseCode.OK) {
-					field.put(fieldName, syncResponse.getFloat(fieldName));
-					writePoint(writeApi,plcCfg.getMeasurement(),plcCfg.getPlcTag(fieldName).getInfluxTags(),field);
-					log.info("InfluxDBJob says: executing at " + new Date()	+ "write to influxdb measurement={},tag={},field={},value={}",
-						"plc4x", "controller", fieldName, syncResponse.getFloat(fieldName));
-				}
-				// Something went wrong, to output an error message instead.
-				else {
-					log.error("Error[{}]: {}", fieldName, syncResponse.getResponseCode(fieldName).name());
+			for(PlcReadRequest r : requestSet) {
+				PlcReadResponse syncResponse = r.execute().get();
+				Map<String, Object> field = new HashMap<String, Object>();
+				for (String fieldName : syncResponse.getFieldNames()) {
+					if (syncResponse.getResponseCode(fieldName) == PlcResponseCode.OK) {
+						field.put(fieldName, syncResponse.getFloat(fieldName));
+						writePoint(writeApi, plcCfg.getMeasurement(), plcCfg.getPlcTag(fieldName).getInfluxTags(), field);
+						log.trace("write to influxdb measurement={},tag={},field={},value={}",
+								plcCfg.getMeasurement(), plcCfg.getPlcTag(fieldName).getInfluxTags(), fieldName, syncResponse.getFloat(fieldName));
+					}
+					// Something went wrong, to output an error message instead.
+					else {
+						log.error("Error[{}]: {}", fieldName, syncResponse.getResponseCode(fieldName).name());
+					}
 				}
 			}
 		} catch (InterruptedException e) {

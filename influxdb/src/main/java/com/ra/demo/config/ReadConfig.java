@@ -27,7 +27,9 @@ public class ReadConfig {
 			// convert JSON string to User object
 			Config config = gson.fromJson(reader, Config.class);
 			if (config.isDebug()){
-				config.getPlcs().forEach(plc -> plc.generateDebugTags());
+				config.getPlcs().forEach(plc -> plc.createDebugTags());
+			}else {
+				config.getPlcs().forEach(plc -> plc.createPlcTagsMap());
 			}
 			// close reader
 			reader.close();

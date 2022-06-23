@@ -2,7 +2,7 @@ package com.ra.demo.plc4x;
 
 import com.ra.demo.config.Config;
 import com.ra.demo.config.ReadConfig;
-import com.ra.demo.influxdb.SimpleTriggerExample;
+import com.ra.demo.influxdb.Trigger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +14,7 @@ public class App
         log.debug( "Hello World!" );
         Config cfg = ReadConfig.read();
         log.debug("{}",cfg);
-        SimpleTriggerExample example = new SimpleTriggerExample();
+        Trigger example = new Trigger();
         example.run(cfg);
     }
 }

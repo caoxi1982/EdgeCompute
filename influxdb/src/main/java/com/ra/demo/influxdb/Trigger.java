@@ -17,10 +17,7 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
@@ -32,15 +29,15 @@ import static org.quartz.TriggerBuilder.newTrigger;
  * 
  * @author Bill Kratzer
  */
-public class SimpleTriggerExample {
+public class Trigger {
 	private Map<String,WriteApi> writeApiMap = new HashMap<>();
 	private Map<String,PlcConnection> plcConnectionMap = new HashMap<>();
-	private Map<String,PlcReadRequest> plcReadRequestMap = new HashMap<>();
+	private Map<String, Set<PlcReadRequest>> plcReadRequestMap = new HashMap<>();
 	private Map<String,Plc> plcConfigMap = new HashMap<>();
 	private static final String PLC_TAG_CONFIG = "tagConfig";
     private static final String INFLUX_WRITE_API= "influx";
     private static final String CIP_DRIVER = "driver";
-    private static final Logger log = LoggerFactory.getLogger(SimpleTriggerExample.class);
+    private static final Logger log = LoggerFactory.getLogger(Trigger.class);
 	private boolean exit = true;
     public void run(Config cfg){
 		clearAllMap();
@@ -132,20 +129,15 @@ public class SimpleTriggerExample {
 					return;
 				}
 				// Create a new read request:
-				PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
+				Set<PlcReadRequest> readRequestSet = new HashSet<PlcReadRequest>();
 				// The different is Array be parsed as one Item or an Array of Items
-				if (cfg.isDebug()) {
-					for (PlcTag tag : plc.getPlcTags()) {
-						builder.addItem(tag.getName(), tag.getItemName(true));
-					}
-				}else{
-					for (PlcTag tag : plc.getPlcTags()) {
-						builder.addItem(tag.getName(), tag.getItemName());
-					}
+				for (Map.Entry<String,PlcTag> entry : plc.getPlcTags().entrySet()) {
+					PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
+					builder.addItem(entry.getKey(), entry.getValue().getItemName());
+					readRequestSet.add(builder.build());
 				}
-				PlcReadRequest readRequest = builder.build();
 				plcConnectionMap.put(plc.getMeasurement(), plcConnection);
-				plcReadRequestMap.put(plc.getMeasurement(), readRequest);
+				plcReadRequestMap.put(plc.getMeasurement(), readRequestSet);
 			}catch (PlcConnectionException e) {
 				//
 			}
