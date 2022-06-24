@@ -69,10 +69,17 @@ public class InfluxDBJob implements Job {
 				Map<String, Object> field = new HashMap<String, Object>();
 				for (String fieldName : syncResponse.getFieldNames()) {
 					if (syncResponse.getResponseCode(fieldName) == PlcResponseCode.OK) {
-						field.put(fieldName, syncResponse.getFloat(fieldName));
+						int counter = syncResponse.getNumberOfValues(fieldName);
+						if (counter > 1){
+							for(int i = 0 ;i < counter; i++) {
+								field.put(fieldName + "_" + String.valueOf(i), syncResponse.getObject(fieldName,i));
+							}
+						}else if (counter == 1) {
+							field.put(fieldName, syncResponse.getObject(fieldName));
+						}
 						writePoint(writeApi, plcCfg.getMeasurement(), plcCfg.getPlcTag(fieldName).getInfluxTags(), field);
 						log.trace("write to influxdb measurement={},tag={},field={},value={}",
-								plcCfg.getMeasurement(), plcCfg.getPlcTag(fieldName).getInfluxTags(), fieldName, syncResponse.getFloat(fieldName));
+										plcCfg.getMeasurement(), plcCfg.getPlcTag(fieldName).getInfluxTags(), fieldName, syncResponse.getFloat(fieldName));
 					}
 					// Something went wrong, to output an error message instead.
 					else {
@@ -86,4 +93,9 @@ public class InfluxDBJob implements Job {
 			log.error(e.getMessage());
 		}
     }
+
+	private Object getValue(PlcReadResponse resq,String datatype){
+
+		return null;
+	}
 }

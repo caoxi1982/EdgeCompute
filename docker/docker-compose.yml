@@ -55,14 +55,14 @@ services:
       bridge:
         ipv4_address: 172.16.0.5
   cip:
-    image: coabbb/ra:test
-    container_name: mytest
+    image: coabbb/ra:1.0.0
+    container_name: mycip
     stdin_open: true
     tty: true
     ports:
       - 8080:8080
     volumes:
-      - c:\\C.json:/var/lib/Connection.json
+      - C:\\myGitHub\\ra_plc4x_influx\\Connection.json:/var/lib/Connection.json
     depends_on:
       - influxdb
       - grafana

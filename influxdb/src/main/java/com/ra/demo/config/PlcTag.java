@@ -1,5 +1,7 @@
 package com.ra.demo.config;
 
+import org.apache.plc4x.java.eip.readwrite.types.CIPDataTypeCode;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,20 +13,23 @@ public class PlcTag {
     private static final String REGEX ="\\[(\\d+)\\]";
     private String name;
     private int length;
+    private String datatype;
 
     private Map<String,String> influxTags = new HashMap<String,String>();
 
-    public PlcTag(String name, int length, Map influxTags) {
+    public PlcTag(String name, int length,String datatype,Map influxTags) {
         this.name = name;
         this.length = length;
+        this.datatype = datatype;
         this.influxTags = influxTags;
     }
 
-    public String getItemName() {return "%" + name + ":" + length;}
+    public String getItemName() {
+        return "%" + name + validDataType(datatype)+ ":" + length;}
 
     public String getItemName(boolean debug) {
         if (debug) {
-            return "%" + name + ":1";
+            return "%" + name + validDataType(datatype) + ":1";
         } else {
             return getItemName();
         }
@@ -42,7 +47,7 @@ public class PlcTag {
     List<PlcTag> flat(){
         ArrayList<PlcTag> newPlcTags = new ArrayList<PlcTag>();
         for(int i = 0;i < length;i++) {
-            newPlcTags.add(new PlcTag(changeArrayIndex(name,i),1,influxTags));
+            newPlcTags.add(new PlcTag(changeArrayIndex(name,i),1,datatype,influxTags));
         }
         return newPlcTags;
     }
@@ -58,6 +63,13 @@ public class PlcTag {
         } else {
             return null;
         }
+    }
+
+    private String validDataType(String datatype){
+        if (CIPDataTypeCode.valueOf(datatype) != null){
+            return ":" + datatype;
+        }
+        return "";
     }
 
     @Override

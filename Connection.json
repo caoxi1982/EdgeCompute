@@ -2,29 +2,70 @@
   "url": "http://influx:8086",
   "org": "ra",
   "token": "U0pdAvYrUbJMPvnD8YZjkm9d8KCVHpeBEe1_LiVlQImsr98ERFRrYKge1hsZVeht_VfEAixTkgsAi6B85lax-Q==",
-  "bucket": "test",
+  "bucket": "test1",
   "debug": true,
-  "connection": "eip://192.168.1.11?backplane=1",
-  "plcTags": [
+  "plcs": [
     {
-      "name": "a_sin[0]",
-      "length": 2,
-      "iTags": { "name1": "a1", "name2": "a2" }
+      "connection": "eip://192.168.1.11?backplane=1",
+      "interval": 5000,
+      "measurement": "L340_1",
+      "plcTags": [
+        {
+          "name": "a_sin[1]",
+          "length": 20,
+          "datatype": "REAL",
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "plcdint",
+          "length": 1,
+          "datatype": "DINT",
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "moter_1.speed",
+          "length": 1,
+          "datatype": "REAL",
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "moter_1.start",
+          "length": 1,
+          "datatype": "BOOL",
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ]
     },
     {
-      "name": "a_sin[50]",
-      "length": 2,
-      "iTags": { "name1": "a1", "name2": "a2" }
-    },
-    {
-      "name": "a_sin[100]",
-      "length": 2,
-      "iTags": { "name1": "a1", "name2": "a2" }
-    },
-    {
-      "name": "a_sin[150]",
-      "length": 2,
-      "iTags": { "name1": "a1", "name2": "a2" }
+      "connection": "eip://192.168.1.21?backplane=1",
+      "interval": 5000,
+      "measurement": "L3100_2",
+      "plcTags": [
+        {
+          "name": "a_sin[1]",
+          "length": 20,
+          "datatype": "REAL",
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "plcdint",
+          "length": 1,
+          "datatype": "DINT",
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "moter_1.speed",
+          "length": 1,
+          "datatype": "REAL",
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "moter_1.start",
+          "length": 1,
+          "datatype": "BOOL",
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ]
     }
   ]
 }

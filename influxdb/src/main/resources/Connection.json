@@ -7,12 +7,31 @@
   "plcs":[
     {
       "connection": "eip://192.168.1.11?backplane=1",
-      "interval": 1000,
+      "interval": 5000,
       "measurement": "L340_1",
       "plcTags": [
         {
           "name": "a_sin[1]",
-          "length": 2000,
+          "length": 20,
+          "datatype": "REAL",
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "plcdint",
+          "length": 1,
+          "datatype": "DINT",
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "moter_1.speed",
+          "length": 1,
+          "datatype": "REAL",
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "moter_1.start",
+          "length": 1,
+          "datatype": "BOOL",
           "influxTags": { "location": "PayOff", "parameter": "Speed" }
         }
       ]
