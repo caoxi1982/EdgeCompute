@@ -37,12 +37,15 @@ public class Trigger {
 	private static final String PLC_TAG_CONFIG = "tagConfig";
     private static final String INFLUX_WRITE_API= "influx";
     private static final String CIP_DRIVER = "driver";
+    private static final String IS_SYNC = "sync";
     private static final Logger log = LoggerFactory.getLogger(Trigger.class);
 	private boolean exit = true;
-    public void run(Config cfg){
+	private Boolean sync = true;
+	public void run(Config cfg){
 		clearAllMap();
 		initialInfluxdb(cfg);
 		initialCIPDriver(cfg);
+
 		try {
 			log.info("------- Initializing -------------------");
 			// First we must get a reference to a scheduler
@@ -60,6 +63,7 @@ public class Trigger {
 				job.getJobDataMap().put(PLC_TAG_CONFIG, plcConfigMap.get(measure));
 				job.getJobDataMap().put(INFLUX_WRITE_API, writeApiMap.get(measure));
 				job.getJobDataMap().put(CIP_DRIVER, plcReadRequestMap.get(measure));
+				job.getJobDataMap().put(IS_SYNC, sync);
 				SimpleTrigger trigger = newTrigger().withIdentity(jobName, measure).startAt(startTime)
 						.withSchedule(simpleSchedule().withIntervalInMilliseconds(interval).repeatForever()).build();
 				Date ft = sched.scheduleJob(job, trigger);

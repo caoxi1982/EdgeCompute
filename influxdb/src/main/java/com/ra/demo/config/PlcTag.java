@@ -35,24 +35,27 @@ public class PlcTag {
             return getItemName();
         }
     }
-
     public String getInfluxFields(int index) {
-        if (influxFields == null){
-            influxFields = new ArrayList<String>();
-        }
-        if (influxFields.get(index) == null) {
-            if (index == 0){
-                influxFields.add(index,name);
-                return name;
-            }else {
-                influxFields.add(index,changeArrayIndex(name,index));
-                return changeArrayIndex(name,index);
-            }
-        }
         if (index < length) {
             return influxFields.get(index);
         } else {
             return "impossible";
+        }
+    }
+    public void setInfluxFields() {
+        ArrayList<String> fields = new ArrayList<String>();
+        if (influxFields == null){
+            for(int i = 0 ;i <length;i++){
+                fields.add(changeArrayIndex(getName(),i));
+            }
+            influxFields = fields;
+        }else {
+            int size = influxFields.size();
+            if ( size < length){
+                for(int i = size ;i <length;i++){
+                    influxFields.add(changeArrayIndex(getName(),i));
+                }
+            }
         }
     }
     public int getLength() {
@@ -78,7 +81,7 @@ public class PlcTag {
             m.appendReplacement(str,"[" + String.valueOf(replace) + "]");
             return m.appendTail(str).toString();
         } else {
-            return null;
+            return tagName;
         }
     }
 

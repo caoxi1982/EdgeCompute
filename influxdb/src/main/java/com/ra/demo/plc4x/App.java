@@ -11,7 +11,6 @@ public class App
     private static Logger log = LoggerFactory.getLogger(App.class);
     public static void main( String[] args )
     {
-        log.debug( "Hello World!" );
         Config cfg = ReadConfig.read();
         log.debug("{}",cfg);
         Trigger example = new Trigger();

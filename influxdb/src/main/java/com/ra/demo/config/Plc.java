@@ -6,21 +6,21 @@ import java.util.Map;
 
 public class Plc {
 
-    private final String connection;
-    private final int interval;
+    private String connection;
+    private int interval;
 
-    private final String measurement;
+    private String measurement;
 
-    private final PlcTag[] plcTags;
+    private PlcTag[] plcTags;
     private boolean debug = false;
 
     private Map<String,PlcTag> plcTagsMap,plcTagsMap_debug;
-
     public Plc(String connection, int interval, String measurement,PlcTag[] plcTags) {
         this.connection = connection;
         this.interval = interval;
         this.plcTags = plcTags;
         this.measurement = measurement;
+        System.out.println("Gson_1");
     }
     public String getConnection() {
         return connection;
@@ -55,8 +55,12 @@ public class Plc {
         Map<String,PlcTag> debugTagMap = new HashMap<>();
         for(Map.Entry<String,PlcTag> entry : tagMap.entrySet()){
             if (entry.getValue().getLength() > 1) {
-                entry.getValue().flat().forEach(t -> debugTagMap.put(t.getName(),t));
+                entry.getValue().flat().forEach(t -> {
+                    t.setInfluxFields();
+                    debugTagMap.put(t.getName(),t);
+                });
             }else if (entry.getValue().getLength() == 1) {
+                entry.getValue().setInfluxFields();
                 debugTagMap.put(entry.getKey(),entry.getValue());
             }
         }
@@ -67,6 +71,7 @@ public class Plc {
         if (plcTagsMap == null){
             plcTagsMap =  new HashMap<String,PlcTag>();
             for(PlcTag tag : Arrays.asList(plcTags)) {
+                tag.setInfluxFields();
                 plcTagsMap.put(tag.getName(),tag);
             }
         }

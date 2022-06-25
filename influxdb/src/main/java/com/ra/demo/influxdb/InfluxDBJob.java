@@ -25,6 +25,8 @@ public class InfluxDBJob implements Job {
 	private static String INFLUX_WRITE_API = "influx";
 	private static String PLC_TAG_CONFIG = "tagConfig";
 	private static String CIP_DRIVER = "driver";
+	private static String IS_SYNC = "sync";
+
 
     public InfluxDBJob() {}
 
@@ -36,7 +38,8 @@ public class InfluxDBJob implements Job {
 			HashSet<PlcReadRequest> requestSet = (HashSet<PlcReadRequest>) dataMap.get(CIP_DRIVER);
 			WriteApi writeApi = (WriteApi) dataMap.get(INFLUX_WRITE_API);
 			Plc plcConfig = (Plc) dataMap.get(PLC_TAG_CONFIG);
-			WriteResponse(writeApi,requestSet,plcConfig);
+			boolean sync = (boolean) dataMap.get(IS_SYNC);
+			WriteResponse(writeApi,requestSet,plcConfig,sync);
 			long endtime = System.currentTimeMillis();
 			log.info("InfluxDBJob says: " + jobKey + " executing at " + new Date() + "Duration is {} ms",
 				(endtime - starttime));
@@ -57,7 +60,7 @@ public class InfluxDBJob implements Job {
 		writeApi.writePoint(point);
     }
 
-    private void WriteResponse(WriteApi writeApi,HashSet<PlcReadRequest> requestSet,Plc plcCfg) {
+    private void WriteResponse(WriteApi writeApi,HashSet<PlcReadRequest> requestSet,Plc plcCfg,boolean sync) {
 		//////////////////////////////////////////////////////////
 		// Read synchronously ...
 		// NOTICE: the ".get()" immediately lets this thread pause until

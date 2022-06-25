@@ -4,6 +4,7 @@
   "token": "U0pdAvYrUbJMPvnD8YZjkm9d8KCVHpeBEe1_LiVlQImsr98ERFRrYKge1hsZVeht_VfEAixTkgsAi6B85lax-Q==",
   "bucket": "test1",
   "debug": true,
+  "sync": true,
   "plcs":[
     {
       "connection": "eip://192.168.1.11?backplane=1",
@@ -28,7 +29,7 @@
           "name": "moter_1.speed",
           "length": 1,
           "datatype": "REAL",
-          "influxFields": "temp1",
+          "influxFields": ["temp1"],
           "influxTags": { "location": "PayOff", "parameter": "Speed" }
         },
         {

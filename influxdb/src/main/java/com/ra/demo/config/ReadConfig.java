@@ -35,7 +35,8 @@ public class ReadConfig {
 			reader.close();
 			return config;
 		} catch (Exception ex) {
-			log.error(ex.toString());
+			ex.printStackTrace();
+			log.error(ex.getMessage());
 			//System.exit(0);
 			return null;
 		}
