@@ -70,12 +70,8 @@ public class InfluxDBJob implements Job {
 				for (String fieldName : syncResponse.getFieldNames()) {
 					if (syncResponse.getResponseCode(fieldName) == PlcResponseCode.OK) {
 						int counter = syncResponse.getNumberOfValues(fieldName);
-						if (counter > 1){
-							for(int i = 0 ;i < counter; i++) {
-								field.put(fieldName + "_" + String.valueOf(i), syncResponse.getObject(fieldName,i));
-							}
-						}else if (counter == 1) {
-							field.put(fieldName, syncResponse.getObject(fieldName));
+						for(int i = 0 ;i < counter; i++) {
+							field.put(plcCfg.getPlcTag(fieldName).getInfluxFields(i),syncResponse.getObject(fieldName,i));
 						}
 						writePoint(writeApi, plcCfg.getMeasurement(), plcCfg.getPlcTag(fieldName).getInfluxTags(), field);
 						log.trace("write to influxdb measurement={},tag={},field={},value={}",

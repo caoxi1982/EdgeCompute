@@ -14,18 +14,21 @@
           "name": "a_sin[1]",
           "length": 20,
           "datatype": "REAL",
+          "influxFields": ["temp","press"],
           "influxTags": { "location": "PayOff", "parameter": "Speed" }
         },
         {
           "name": "plcdint",
           "length": 1,
           "datatype": "DINT",
+          "influxFields": ["temp","press"],
           "influxTags": { "location": "PayOff", "parameter": "Speed" }
         },
         {
           "name": "moter_1.speed",
           "length": 1,
           "datatype": "REAL",
+          "influxFields": "temp1",
           "influxTags": { "location": "PayOff", "parameter": "Speed" }
         },
         {

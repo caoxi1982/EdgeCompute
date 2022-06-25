@@ -2,10 +2,7 @@ package com.ra.demo.config;
 
 import org.apache.plc4x.java.eip.readwrite.types.CIPDataTypeCode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,16 +11,20 @@ public class PlcTag {
     private String name;
     private int length;
     private String datatype;
+    private List<String> influxFields;
 
     private Map<String,String> influxTags = new HashMap<String,String>();
 
-    public PlcTag(String name, int length,String datatype,Map influxTags) {
+    public PlcTag(String name, int length, List<String> influxFields, String datatype, Map<String,String> influxTags) {
         this.name = name;
         this.length = length;
         this.datatype = datatype;
+        this.influxFields = influxFields;
         this.influxTags = influxTags;
     }
-
+    public String getName() {
+        return name;
+    }
     public String getItemName() {
         return "%" + name + validDataType(datatype)+ ":" + length;}
 
@@ -34,10 +35,26 @@ public class PlcTag {
             return getItemName();
         }
     }
-    public String getName() {
-        return name;
-    }
 
+    public String getInfluxFields(int index) {
+        if (influxFields == null){
+            influxFields = new ArrayList<String>();
+        }
+        if (influxFields.get(index) == null) {
+            if (index == 0){
+                influxFields.add(index,name);
+                return name;
+            }else {
+                influxFields.add(index,changeArrayIndex(name,index));
+                return changeArrayIndex(name,index);
+            }
+        }
+        if (index < length) {
+            return influxFields.get(index);
+        } else {
+            return "impossible";
+        }
+    }
     public int getLength() {
 	    return length;
     }
@@ -47,7 +64,7 @@ public class PlcTag {
     List<PlcTag> flat(){
         ArrayList<PlcTag> newPlcTags = new ArrayList<PlcTag>();
         for(int i = 0;i < length;i++) {
-            newPlcTags.add(new PlcTag(changeArrayIndex(name,i),1,datatype,influxTags));
+            newPlcTags.add(new PlcTag(changeArrayIndex(name,i),1,Arrays.asList(getInfluxFields(i)),datatype,influxTags));
         }
         return newPlcTags;
     }
