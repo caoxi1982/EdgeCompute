@@ -4,13 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Config {
-    private String url;
-    private String token;
-    private String org;
-    private String bucket;
+    private final String url;
+    private final String token;
+    private final String org;
+    private final String bucket;
     private boolean debug = false;
-    private boolean sync = true;
-    private Plc[] plcs;
+    private final Plc[] plcs;
 
     public Config(String url,String token,String org,String bucket,boolean debug,Plc[] plcs) {
         this.url = url;

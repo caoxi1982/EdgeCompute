@@ -20,7 +20,7 @@
 	</appender>
 
 	<logger name="io.netty" level="WARN"/>
-	<logger name="com.ra.demo.plc4x.App"	 level="DEBUG"/>
+	<logger name="com.ra.demo"	 level="TRACE"/>
 
 	<root level="INFO">
 		<appender-ref ref="ROLLING" />

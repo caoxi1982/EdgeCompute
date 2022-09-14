@@ -30,12 +30,10 @@ import static org.quartz.TriggerBuilder.newTrigger;
  * @author Bill Kratzer
  */
 public class Trigger {
-	private Map<String,WriteApi> writeApiMap = new HashMap<>();
+	private Map<String,WriteWrapper> writeApiMap = new HashMap<>();
 	private Map<String,PlcConnection> plcConnectionMap = new HashMap<>();
 	private Map<String, Set<PlcReadRequest>> plcReadRequestMap = new HashMap<>();
-	private Map<String,Plc> plcConfigMap = new HashMap<>();
-	private static final String PLC_TAG_CONFIG = "tagConfig";
-    private static final String INFLUX_WRITE_API= "influx";
+    private static final String INFLUX_WRITE= "influx";
     private static final String CIP_DRIVER = "driver";
     private static final String IS_SYNC = "sync";
     private static final Logger log = LoggerFactory.getLogger(Trigger.class);
@@ -45,7 +43,6 @@ public class Trigger {
 		clearAllMap();
 		initialInfluxdb(cfg);
 		initialCIPDriver(cfg);
-
 		try {
 			log.info("------- Initializing -------------------");
 			// First we must get a reference to a scheduler
@@ -60,8 +57,7 @@ public class Trigger {
 				String jobName = "InfluxDB_" + measure + String.valueOf(interval);
 				Date startTime = DateBuilder.nextGivenSecondDate(null, 15);
 				JobDetail job = newJob(InfluxDBJob.class).withIdentity(jobName, measure).build();
-				job.getJobDataMap().put(PLC_TAG_CONFIG, plcConfigMap.get(measure));
-				job.getJobDataMap().put(INFLUX_WRITE_API, writeApiMap.get(measure));
+				job.getJobDataMap().put(INFLUX_WRITE, writeApiMap.get(measure));
 				job.getJobDataMap().put(CIP_DRIVER, plcReadRequestMap.get(measure));
 				job.getJobDataMap().put(IS_SYNC, sync);
 				SimpleTrigger trigger = newTrigger().withIdentity(jobName, measure).startAt(startTime)
@@ -118,8 +114,7 @@ public class Trigger {
 		InfluxDBClient client = InfluxDBClientFactory.create(cfg.getURL(), cfg.getToken().toCharArray(),cfg.getORG(),cfg.getBucket());
 		cfg.getPlcs().forEach((plc) ->{
 			WriteApi writeApi = client.makeWriteApi(WriteOptions.builder().batchSize(2000).flushInterval(10000).jitterInterval(3000).bufferLimit(100000).build());
-			writeApiMap.put(plc.getMeasurement(),writeApi);
-			plcConfigMap.put(plc.getMeasurement(),plc);
+			writeApiMap.put(plc.getMeasurement(),new WriteWrapper(plc,writeApi));
 		});
 	}
 	private void initialCIPDriver(@NotNull Config cfg){
@@ -151,6 +146,5 @@ public class Trigger {
 		writeApiMap.clear();
 		plcConnectionMap.clear();
 		plcReadRequestMap.clear();
-		plcConfigMap.clear();
 	}
 }
