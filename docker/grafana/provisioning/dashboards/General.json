@@ -1,0 +1,1283 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 8,
+  "iteration": 1659331033491,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "页面导航",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "ViewPoint",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://192.168.3.248/FTVP/"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "links": [
+            {
+              "targetBlank": false,
+              "title": "details",
+              "url": "http://192.168.3.248:3000/d/f6bfC_gVk/new-dashboard?orgId=1&var-ID=${__data.fields.id}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 0.5
+              },
+              {
+                "color": "light-yellow",
+                "value": 0.6
+              },
+              {
+                "color": "dark-green",
+                "value": 0.7
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Volume"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "产量"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 20,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "links": [],
+      "options": {
+        "basemap": {
+          "config": {
+            "showLabels": false,
+            "theme": "dark"
+          },
+          "name": "Layer 0",
+          "type": "carto"
+        },
+        "controls": {
+          "mouseWheelZoom": false,
+          "showAttribution": false,
+          "showDebug": false,
+          "showScale": false,
+          "showZoom": false
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": true,
+              "style": {
+                "color": {
+                  "field": "OEE",
+                  "fixed": "dark-orange"
+                },
+                "opacity": 0.2,
+                "rotation": {
+                  "field": "OEE",
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "clamped"
+                },
+                "size": {
+                  "field": "Volume",
+                  "fixed": 5,
+                  "max": 40,
+                  "min": 10
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                },
+                "text": {
+                  "field": "OEE",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "textConfig": {
+                  "fontSize": 16,
+                  "offsetX": 10,
+                  "offsetY": -35,
+                  "textAlign": "left",
+                  "textBaseline": "top"
+                }
+              }
+            },
+            "location": {
+              "latitude": "Latitude",
+              "longitude": "Longitude",
+              "mode": "coords"
+            },
+            "name": "OEE",
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "tooltip": {
+          "mode": "details"
+        },
+        "view": {
+          "id": "coords",
+          "lat": 39.9,
+          "lon": 116.32,
+          "shared": false,
+          "zoom": 4
+        }
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  City,Latitude,Longitude,(Availability/100)*(Quality/100)*(performance/100) as OEE, Volume,timestamp,id\nFROM\n  [FTAE].[dbo].[SimulateMap]",
+          "refId": "A"
+        }
+      ],
+      "title": "中国区工厂OEE/产量总览",
+      "type": "geomap"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "super-light-blue",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/^City$/",
+          "values": true
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  City\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 5,
+        "w": 2,
+        "x": 18,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "content": "<font size=\"12\" color=\"F0F8FF\"></font>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 12,
+        "y": 2
+      },
+      "id": 11,
+      "options": {
+        "content": "<font size=\"4\">安全</font>\r\n",
+        "mode": "html"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "",
+          "refId": "A"
+        }
+      ],
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "SafetyDayLost"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "损工天数"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Training"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "semi-dark-orange",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 50
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "人员培训比率"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "SafetyRunningDays"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "无事故运行天数"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 13,
+        "y": 2
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  SafetyDayLost,Training,SafetyRunningDays\nFROM\n  SimulateMap\nWHERE\n  id = $ID",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 6,
+        "w": 1,
+        "x": 12,
+        "y": 5
+      },
+      "id": 12,
+      "options": {
+        "content": "<font size=\"4\">OEE</font>\r\n",
+        "mode": "html"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  City\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "refId": "A"
+        }
+      ],
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "super-light-yellow",
+                "value": 70
+              },
+              {
+                "color": "green",
+                "value": 85
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 13,
+        "y": 5
+      },
+      "id": 6,
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/^OEE$/",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "refId": "A"
+        }
+      ],
+      "title": "OEE",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 2,
+        "w": 1,
+        "x": 17,
+        "y": 5
+      },
+      "id": 21,
+      "options": {
+        "content": "<font size=\"12\" color=\"F0F8FF\"></font>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "light-yellow",
+                "value": 70
+              },
+              {
+                "color": "green",
+                "value": 85
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Availability"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "可开机率"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Quality"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "质量"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "performance"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "生产效率"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 5
+      },
+      "id": 5,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  Availability,Quality,performance\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 4,
+        "w": 1,
+        "x": 17,
+        "y": 7
+      },
+      "id": 8,
+      "options": {
+        "content": "<font size=\"12\" color=\"F0F8FF\">=</font>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 9,
+        "w": 1,
+        "x": 12,
+        "y": 11
+      },
+      "id": 15,
+      "options": {
+        "content": "<font size=\"6\">能耗</font>\r\n",
+        "mode": "html"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  City\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "refId": "A"
+        }
+      ],
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "max": 500,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 13,
+        "y": 11
+      },
+      "id": 14,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 3,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^PowerConsumption$/",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  PowerConsumption\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n\n",
+          "refId": "A"
+        }
+      ],
+      "title": "电能消耗",
+      "transparent": true,
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "max": 40,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "m3"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 19,
+        "y": 11
+      },
+      "id": 13,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 3,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^GasConsumption$/",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT\n  GasConsumption\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n\n",
+          "refId": "A"
+        }
+      ],
+      "title": "天然气消耗",
+      "transparent": true,
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "my_influxdb2"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "axisGridShow": false,
+            "axisLabel": "",
+            "axisPlacement": "right",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 22,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 250,
+          "min": 150,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 13,
+        "y": 13
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "my_influxdb2"
+          },
+          "hide": false,
+          "query": "from(bucket: \"ISC1\")\r\n  |> range(start: -1d, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Energy\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"PowerConsumption\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "电能曲线",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "my_influxdb2"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "axisGridShow": false,
+            "axisLabel": "",
+            "axisPlacement": "right",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 22,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 14,
+          "min": 10,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "m3/h"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 19,
+        "y": 13
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "my_influxdb2"
+          },
+          "hide": false,
+          "query": "from(bucket: \"ISC1\")\r\n  |> range(start: -1d, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Energy\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"GasConsumption\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "天然气曲线",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 12,
+        "y": 20
+      },
+      "id": 18,
+      "options": {
+        "content": "",
+        "mode": "html"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 12,
+        "y": 22
+      },
+      "id": 19,
+      "options": {
+        "content": "",
+        "mode": "html"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 12,
+        "y": 24
+      },
+      "id": 20,
+      "options": {
+        "content": "",
+        "mode": "html"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "3",
+          "value": "3"
+        },
+        "datasource": {
+          "type": "mssql",
+          "uid": "my_mssql"
+        },
+        "definition": "SELECT id FROM SimulateMap",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "ID",
+        "options": [],
+        "query": "SELECT id FROM SimulateMap",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "集团总览",
+  "uid": "f6bfC_gVk",
+  "version": 141,
+  "weekStart": ""
+}

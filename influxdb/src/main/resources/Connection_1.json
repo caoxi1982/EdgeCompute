@@ -1,0 +1,1002 @@
+{
+  "url": "http://localhost:8086",
+  "org": "ra",
+  "token": "U0pdAvYrUbJMPvnD8YZjkm9d8KCVHpeBEe1_LiVlQImsr98ERFRrYKge1hsZVeht_VfEAixTkgsAi6B85lax-Q==",
+  "bucket": "test1",
+  "debug": false,
+  "plcs":[
+    {
+      "connection": "eip://192.168.1.11?backplane=1",
+      "interval": 20,
+      "measurement": "L340_Run",
+      "plcTags": [
+        {
+          "name": "a_sin[1]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp1"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "a_sin[50]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp2"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[100]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp3"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[150]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp4"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[250]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp5"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[350]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp6"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[450]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp7"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[550]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp8"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[650]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp9"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[750]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp10"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[850]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp11"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[950]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp12"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "a_sin[1050]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp13"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1150]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp14"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1250]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp15"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1350]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp16"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1450]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp17"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1550]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp18"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1650]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp19"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1750]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp20"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1850]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp21"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1950]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp22"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[200]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp23"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[300]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp24"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[400]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp25"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[500]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp26"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[600]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp27"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[700]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp28"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[800]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp29"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[900]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp30"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1000]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp31"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1100]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp32"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1200]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp33"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1300]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp34"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1400]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp35"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1500]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp36"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }      ,
+        {
+          "name": "a_sin[1600]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp37"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1700]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp38"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1800]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp39"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1900]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp40"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[2000]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp41"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ]
+    },
+    {
+      "connection": "eip://192.168.1.21?backplane=1",
+      "interval": 20,
+      "measurement": "L3100_Run",
+      "plcTags": [
+        {
+          "name": "a_sin[1]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp1"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "a_sin[50]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp2"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[100]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp3"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[150]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp4"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[250]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp5"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[350]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp6"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[450]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp7"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[550]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp8"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[650]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp9"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[750]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp10"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[850]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp11"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[950]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp12"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "a_sin[1050]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp13"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1150]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp14"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1250]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp15"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1350]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp16"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1450]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp17"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1550]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp18"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1650]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp19"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1750]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp20"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1850]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp21"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1950]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp22"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[200]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp23"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[300]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp24"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[400]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp25"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[500]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp26"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[600]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp27"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[700]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp28"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[800]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp29"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[900]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp30"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1000]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp31"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1100]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp32"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1200]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp33"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1300]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp34"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1400]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp35"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1500]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp36"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }      ,
+        {
+          "name": "a_sin[1600]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp37"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1700]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp38"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1800]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp39"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1900]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp40"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[2000]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp41"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ]
+    },
+    {
+      "connection": "eip://192.168.1.31?backplane=1",
+      "interval": 20,
+      "measurement": "L3102_Run",
+      "plcTags": [
+        {
+          "name": "a_sin[1]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp1"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "a_sin[50]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp2"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[100]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp3"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[150]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp4"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[250]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp5"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[350]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp6"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[450]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp7"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[550]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp8"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[650]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp9"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[750]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp10"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[850]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp11"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[950]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp12"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "a_sin[1050]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp13"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1150]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp14"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1250]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp15"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1350]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp16"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1450]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp17"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1550]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp18"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1650]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp19"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1750]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp20"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1850]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp21"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1950]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp22"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[200]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp23"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[300]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp24"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[400]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp25"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[500]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp26"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[600]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp27"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[700]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp28"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[800]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp29"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[900]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp30"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1000]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp31"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1100]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp32"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1200]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp33"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1300]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp34"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1400]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp35"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1500]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp36"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }      ,
+        {
+          "name": "a_sin[1600]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp37"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1700]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp38"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1800]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp39"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[1900]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp40"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ,
+        {
+          "name": "a_sin[2000]",
+          "length": 50,
+          "datatype": "REAL",
+          "influxFields": ["Atemp41"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ]
+    }
+  ]
+}

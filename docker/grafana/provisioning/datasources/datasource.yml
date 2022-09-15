@@ -4,15 +4,15 @@ datasources:
   - name: MSSQL
     type: mssql
     uid: my_mssql
-    url: localhost:1433
-    database: grafana
-    user: grafana
+    url: 192.168.248.40:1433
+    database: AlarmEvent
+    user: sa
     jsonData:
       maxOpenConns: 0 # Grafana v5.4+
       maxIdleConns: 2 # Grafana v5.4+
       connMaxLifetime: 14400 # Grafana v5.4+
     secureJsonData:
-      password: 'Password!'
+      password: '123'
   - name: InfluxDB2
     type: influxdb
     access: proxy

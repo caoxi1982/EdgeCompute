@@ -1,0 +1,1635 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 5,
+  "iteration": 1659331063073,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "页面导航",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "ViewPoint",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://192.168.3.248/FTVP/"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "limit": 8,
+          "values": true
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "rawSql": "SELECT TOP 7\r\n  SubString(SourceName,CHARINDEX('@',SourceName,0)+1,Len(SourceName))\r\n  ,count(EventAssociationID) as Alarmcount\r\nFROM AllEvent\r\nWHERE \r\n  Active = 1 \r\n  and GroupPath = '$GroupPath'\r\n  and $__timeFilter(EventTimeStamp)\r\nGROUP BY SourceName\r\nORDER BY Alarmcount DESC",
+          "refId": "A"
+        }
+      ],
+      "title": "区域 $GroupPath 报警次数排名",
+      "transparent": true,
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "my_influxdb2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "pattern": "(.*)({.*})",
+                "result": {
+                  "color": "super-light-yellow",
+                  "index": 0,
+                  "text": "$1"
+                }
+              },
+              "type": "regex"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 85
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "FuranceZone1Temp.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "炉子1区温度"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 890
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 900
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 910
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 920
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "min",
+                "value": 850
+              },
+              {
+                "id": "max",
+                "value": 950
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "FuranceZone2Temp.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "炉子2区温度"
+              },
+              {
+                "id": "min",
+                "value": 870
+              },
+              {
+                "id": "max",
+                "value": 970
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 910
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 920
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 930
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 940
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "FuranceZone3Temp.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "炉子3区温度"
+              },
+              {
+                "id": "min",
+                "value": 870
+              },
+              {
+                "id": "max",
+                "value": 970
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 910
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 920
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 930
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 940
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "FuranceZone4Temp.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "炉子4区温度"
+              },
+              {
+                "id": "min",
+                "value": 900
+              },
+              {
+                "id": "max",
+                "value": 1000
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 940
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 950
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 960
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 970
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "ConditionerFlow.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "脱脂流量"
+              },
+              {
+                "id": "unit",
+                "value": "flowlpm"
+              },
+              {
+                "id": "min",
+                "value": 180
+              },
+              {
+                "id": "max",
+                "value": 260
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 80
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 210
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 230
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 250
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "ConditionerPH.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "脱脂PH"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "min",
+                "value": 7.5
+              },
+              {
+                "id": "max",
+                "value": 12
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 8
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 9
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 10
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 11
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "ConditionerTemp1.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "脱脂温度1"
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "min",
+                "value": 60
+              },
+              {
+                "id": "max",
+                "value": 105
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 80
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 95
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 100
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "ConditionerTemp2.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "脱脂温度2"
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "min",
+                "value": 60
+              },
+              {
+                "id": "max",
+                "value": 95
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 65
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 80
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 90
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "TakeUpP1Current.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "1号收线电流"
+              },
+              {
+                "id": "unit",
+                "value": "amp"
+              },
+              {
+                "id": "min",
+                "value": 9
+              },
+              {
+                "id": "max",
+                "value": 15
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 10
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 12
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 14
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 15
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "TakeUpP2Current.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "2号收线电流"
+              },
+              {
+                "id": "unit",
+                "value": "amp"
+              },
+              {
+                "id": "min",
+                "value": 1.4
+              },
+              {
+                "id": "max",
+                "value": 4
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 1.5
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 2.1
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 2.9
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 3.5
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "TakeUpP1Speed.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "1号收线转速"
+              },
+              {
+                "id": "unit",
+                "value": "rotrpm"
+              },
+              {
+                "id": "min",
+                "value": 1400
+              },
+              {
+                "id": "max",
+                "value": 1600
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 1480
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 1520
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "TakeUpP2Speed.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "2号收线转速"
+              },
+              {
+                "id": "unit",
+                "value": "rotrpm"
+              },
+              {
+                "id": "min",
+                "value": 950
+              },
+              {
+                "id": "max",
+                "value": 1050
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 980
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 1020
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "PickingFlow.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "酸洗流量"
+              },
+              {
+                "id": "unit",
+                "value": "flowlpm"
+              },
+              {
+                "id": "min",
+                "value": 180
+              },
+              {
+                "id": "max",
+                "value": 300
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 200
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 210
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 230
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 240
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "PickingPH.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "酸洗PH"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "min",
+                "value": 7.5
+              },
+              {
+                "id": "max",
+                "value": 12
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 8
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 9
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 10
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 11
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "PickingTemp1.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "酸洗温区1"
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "min",
+                "value": 60
+              },
+              {
+                "id": "max",
+                "value": 140
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 80
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 95
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 100
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "PickingTemp2.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "酸洗温区2"
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "min",
+                "value": 60
+              },
+              {
+                "id": "max",
+                "value": 95
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 65
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 80
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 90
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "RinsingPressure.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "水洗压力"
+              },
+              {
+                "id": "unit",
+                "value": "pressurekpa"
+              },
+              {
+                "id": "min",
+                "value": 700
+              },
+              {
+                "id": "max",
+                "value": 900
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 680
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 720
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 780
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 850
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "RinsingTemp1.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "水洗温区1"
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "min",
+                "value": 350
+              },
+              {
+                "id": "max",
+                "value": 600
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 450
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 480
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 520
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 550
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "RinsingTemp2.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "水洗温区2"
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "min",
+                "value": 250
+              },
+              {
+                "id": "max",
+                "value": 500
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 350
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 380
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 420
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 450
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "RinsingTemp3.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "水洗温区3"
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "min",
+                "value": 150
+              },
+              {
+                "id": "max",
+                "value": 400
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 250
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 280
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 320
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 380
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 0
+      },
+      "id": 12,
+      "maxDataPoints": 20,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "my_influxdb2"
+          },
+          "hide": false,
+          "query": "from(bucket: \"ISC1\")\r\n  |> range(start: -1h, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Machines\")\r\n  |> filter(fn: (r) => r[\"Part\"] == \"${GroupPath}\")\r\n  |> filter(fn: (r) => r[\"_field\"] != \"Quality\")\r\n  |> last()\r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n ",
+          "refId": "A"
+        }
+      ],
+      "title": "$GroupPath 过程变量当前值",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "my_influxdb2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 47,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*PH.*/"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "left"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "PH"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.axisSoftMin",
+                "value": 0
+              },
+              {
+                "id": "custom.axisSoftMax",
+                "value": 15
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*Temp.*/"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "Temperature"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*Flow.*/"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "left"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "Flow"
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    20,
+                    10
+                  ],
+                  "fill": "dash"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*Current.*/"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "left"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "A"
+              },
+              {
+                "id": "custom.axisSoftMin",
+                "value": 0
+              },
+              {
+                "id": "custom.axisSoftMax",
+                "value": 30
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    0,
+                    3,
+                    3
+                  ],
+                  "fill": "dot"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*Speed.*/"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "RPM"
+              },
+              {
+                "id": "custom.axisSoftMin",
+                "value": 800
+              },
+              {
+                "id": "custom.axisSoftMax",
+                "value": 1600
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "my_influxdb2"
+          },
+          "hide": false,
+          "query": "from(bucket: \"ISC1\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Machines\")\r\n  |> filter(fn: (r) => r[\"Part\"] == \"${GroupPath}\")\r\n  |> filter(fn: (r) => r[\"_field\"] != \"Quality\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "$GroupPath 工艺变量历史曲线",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "left",
+            "displayMode": "color-background",
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue"
+              },
+              {
+                "color": "light-green",
+                "value": 80
+              },
+              {
+                "color": "super-light-red",
+                "value": 90
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "DeviceName"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 213
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Message"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 514
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 10,
+      "options": {
+        "footer": {
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT \n  [DeviceName]\n  ,[Message]\n  ,[EventTimeStamp]\n  FROM [FTAE].[dbo].[Diagnostic]\n  WHERE State = 1 and  [DeviceName] IN ( $ShortCut) and $__timeFilter(EventTimeStamp)\n  ORDER BY EventTimeStamp",
+          "refId": "A"
+        }
+      ],
+      "title": "诊断信息汇总",
+      "transparent": true,
+      "type": "table"
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "Furnace",
+          "value": "Furnace"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "设备模块",
+        "multi": false,
+        "name": "GroupPath",
+        "options": [
+          {
+            "selected": true,
+            "text": "Furnace",
+            "value": "Furnace"
+          },
+          {
+            "selected": false,
+            "text": "Conditioner",
+            "value": "Conditioner"
+          },
+          {
+            "selected": false,
+            "text": "Takeup",
+            "value": "Takeup"
+          },
+          {
+            "selected": false,
+            "text": "Picking",
+            "value": "Picking"
+          },
+          {
+            "selected": false,
+            "text": "Rinsing",
+            "value": "Rinsing"
+          }
+        ],
+        "query": "Furnace,Conditioner,Takeup,Picking,Rinsing",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "mssql",
+          "uid": "my_mssql"
+        },
+        "definition": "  select distinct DeviceName from [dbo].[Diagnostic]",
+        "hide": 0,
+        "includeAll": true,
+        "label": "设备名",
+        "multi": false,
+        "name": "ShortCut",
+        "options": [],
+        "query": "  select distinct DeviceName from [dbo].[Diagnostic]",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "1m",
+      "5m",
+      "20",
+      "1h",
+      "2h"
+    ]
+  },
+  "timezone": "",
+  "title": "工艺",
+  "uid": "AU_HmbR4k",
+  "version": 107,
+  "weekStart": ""
+}

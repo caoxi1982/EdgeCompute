@@ -1,0 +1,1292 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 3,
+  "iteration": 1659331070726,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "页面导航",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "ViewPoint",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://192.168.3.248/FTVP/"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "links": [
+            {
+              "title": "test",
+              "url": "http://192.168.3.248:3000/d/AU_HmbR4k/process?orgId=1&var-GroupPath=${__data.fields.GroupPath}&ShortCut=All"
+            }
+          ],
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "displayLabels": [
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT \r\n  GroupPath = \r\n  CASE \r\n    WHEN GroupPath ='' THEN 'System'\r\n    ELSE GroupPath\r\n  END\r\n  ,count(EventAssociationID) as Alarmcount\r\nFROM AllEvent\r\nWHERE \r\n  Active = 1\r\n  and $__timeFilter(EventTimeStamp)\r\nGROUP BY GroupPath\r\nORDER BY Alarmcount DESC",
+          "refId": "A"
+        }
+      ],
+      "title": "各模块报警次数统计",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "displayMode": "color-background",
+            "filterable": false,
+            "inspect": false,
+            "minWidth": 100
+          },
+          "links": [
+            {
+              "title": "test",
+              "url": "http://192.168.3.248:3000/d/AU_HmbR4k/process?orgId=1&var-GroupPath=${__data.fields.GroupPath}&ShortCut=All"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "SourceName"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 447
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EventTimeStamp"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 198
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Severity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 68
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 18,
+        "x": 6,
+        "y": 0
+      },
+      "id": 22,
+      "options": {
+        "footer": {
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT TOP 15 [SourceName]\r\n      ,[EventTimeStamp]\r\n      ,[Severity]\r\n      ,[Message]\r\n      ,[AlarmClass]\r\n      ,[InputValue]\r\n      ,[LimitValue]\r\n      ,[UserComment]\r\n      ,[Tag1Value]\r\n      ,[Tag2Value]\r\n      ,[Tag3Value]\r\n      ,[Tag4Value]\r\n      ,[GroupPath]\r\nFROM AllEvent\r\nWHERE \r\n  Active = 1\r\n  and $__timeFilter(EventTimeStamp)\r\nORDER BY EventTimeStamp DESC",
+          "refId": "A"
+        }
+      ],
+      "title": "当前报警",
+      "type": "table"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 16,
+      "title": "概览",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 5,
+        "x": 0,
+        "y": 11
+      },
+      "id": 11,
+      "options": {
+        "displayLabels": [
+          "value"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "DECLARE\t@return_value int\r\nDECLARE @start datetime\r\nDECLARE @end datetime\r\nDECLARE @now datetime\r\nset @start = $__timeFrom();\r\nset @end = $__timeTo();\r\nset @now = getdate();\r\n\r\ncreate table #temp (\t\t\r\n\tActiveTime [datetime2](7) NULL,\r\n\tInactiveTime [datetime2](7) NULL,\r\n\tAckedTime [datetime2](7) NULL, \r\n\tAlarm [nvarchar](512),\r\n\t[Severity] [int] NULL,\r\n\t[Priority] [int] NULL,\r\n\t[Tag1Value] [nvarchar](128) NULL,\r\n\t[Tag2Value] [nvarchar](128) NULL,\r\n\t[Tag3Value] [nvarchar](128) NULL,\r\n\t[Tag4Value] [nvarchar](128) NULL,\r\n\tDuration [int] NULL,\r\n\t[Message] [nvarchar](512) NULL,\r\n\tSuppressedTime [datetime2](7) NULL,\r\n\tDisabledTime [datetime2](7) NULL,\r\n\t[InputValue] [float] NULL,\r\n\t[LimitValue] [float] NULL, \r\n\tShelvedTime [datetime2](7) NULL,\r\n\tAlarmClass [nvarchar](1000) NULL,\r\n\tEventAssociationID [uniqueidentifier] NULL,\r\n\tServerName[nvarchar](50) NULL,\r\n\tSource [nvarchar](512) NULL)\r\n\r\nINSERT INTO #temp\r\nEXEC\t [dbo].[vpSSRSGetAllEventsInTimePeriod]\r\n\t\t@from_dt = @start,\r\n\t\t@to_dt = @end,\r\n\t\t@alarm = N'$AlarmFilter',\r\n\t\t@ServerName = N'FactoryTalk Linx',\r\n\t\t@LocalTime = @now,\r\n\t\t@TopicName = N'CookieLine',\r\n\t\t@StaleDays = 0\r\nSELECT TOP 5 Alarm,sum(Duration) as SumDuration FROM #temp GROUP BY Alarm ORDER BY SumDuration DESC\r\n--DO NOT FORGET TO DROP THE TEMPLATE TABLE\r\nDROP TABLE #Temp\r\n--SELECT\t'Return Value' = @return_value\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "报警持续时间排名（含过滤器 $AlarmFilter）",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Urgent"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "High"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Medium"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Low"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 5,
+        "x": 5,
+        "y": 11
+      },
+      "id": 21,
+      "options": {
+        "displayLabels": [
+          "percent",
+          "value"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT sub.SeverityName,Sum(sub.Counter) \r\nFROM\r\n  (SELECT \r\n\t\tCASE \r\n\t\t\tWHEN Severity between 1 and 250 THEN  'Low'\r\n\t\t\tWHEN Severity between 251 and 500  THEN 'Medium'\r\n\t\t\tWHEN Severity between 501 and 750  THEN 'High'\r\n\t\t\tWHEN Severity between 751 and 1000  THEN  'Urgent'\r\n\t\t\tEND AS SeverityName,\r\n\t\tcount(EventAssociationID) AS Counter  \r\nFROM Allevent \r\nWHERE \r\n  (Active = 1 or EffDisabled =0 or Disabled =0 or Suppressed = 0 or Shelved =0)\r\n  and $__timeFilter(EventTimeStamp)\r\n  and SourceName like ('%' + '$AlarmFilter' + '%')\r\nGROUP BY Severity) as sub \r\nGROUP BY sub.SeverityName",
+          "refId": "A"
+        }
+      ],
+      "title": "报警严重性分析（含过滤器 $AlarmFilter）",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 5,
+        "x": 10,
+        "y": 11
+      },
+      "id": 20,
+      "options": {
+        "displayLabels": [
+          "percent",
+          "value"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT \r\n\t\tAlarmClass,\r\n\t\tcount(EventAssociationID) AS Counter  \r\nFROM Allevent \r\nWHERE \r\n  (Active = 1 or EffDisabled =0 or Disabled =0 or Suppressed = 0 or Shelved =0)\r\n  and $__timeFilter(EventTimeStamp)\r\n  and SourceName like ('%' + '$AlarmFilter' + '%')\r\nGROUP BY AlarmClass",
+          "refId": "A"
+        }
+      ],
+      "title": "报警类别分析（含报警过滤器 $AlarmFilter）",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlYlRd"
+          },
+          "custom": {
+            "align": "left",
+            "displayMode": "color-background",
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "InactiveTime"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 114
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Alarm"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 141
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EventAssociationID"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 159
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ActiveTime"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 167
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 9,
+        "x": 15,
+        "y": 11
+      },
+      "id": 18,
+      "options": {
+        "footer": {
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "DECLARE @start datetime\r\nDECLARE @end datetime\r\nDECLARE @now datetime\r\nset @start = $__timeFrom();\r\nset @end = $__timeTo();\r\nset @now = getdate();\r\n\r\n\r\ncreate table #temp4 (\t\t\r\n\tActiveTime [datetime2](7) NULL,\r\n\tInactiveTime [datetime2](7) NULL,\r\n\tAlarm [nvarchar](512),\r\n\tEventAssociationID [uniqueidentifier] NULL,\r\n\tSourceLong [nvarchar](512) NULL,\r\n\t)\r\n\r\n--GROUP BY SourceName\r\n\r\nINSERT INTO #temp4\r\n\r\n\r\nEXEC [dbo].[vpSSRSGetAllEventsInTimePeriod_Stale]\r\n\t\t@from_dt = @start,\r\n\t\t@to_dt = @end,\r\n\t\t@alarm = N'',\r\n\t\t@ServerName = N'FactoryTalk Linx',\r\n\t\t@LocalTime = @now,\r\n\t\t@TopicName = N'Myself',\r\n\t\t@StaleDays = 7\r\nselect Top 10 ActiveTime, Alarm, SourceLong from #temp4 order by ActiveTime desc\r\nDrop table #temp4",
+          "refId": "A"
+        }
+      ],
+      "title": "过去一周一直持续的且无人响应的报警",
+      "type": "table"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 14,
+      "title": "特殊报警列表",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EnabledTime"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 190
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Alarm"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 509
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Severity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 88
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Priority"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 75
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Tag1Value"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Tag2Value"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 95
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Tag3Value"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 92
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Tag4Value"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 96
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AlarmClass"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 103
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "DisabledTime"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 192
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 6,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "DECLARE\t@return_value int\r\nDECLARE @start datetime\r\nDECLARE @end datetime\r\nDECLARE @now datetime\r\nset @start = $__timeFrom();\r\nset @end = $__timeTo()\r\nset @now = getdate();\r\n\r\n\r\ncreate table #temp3 (\t\t\r\n\tDisabledTime [datetime2](7) NULL,\r\n\tEnabledTime [datetime2](7) NULL,\r\n\tAlarm [nvarchar](512),\r\n\t[Severity] [int] NULL,\r\n\t[Priority] [int] NULL,\r\n\t[Tag1Value] [nvarchar](128) NULL,\r\n\t[Tag2Value] [nvarchar](128) NULL,\r\n\t[Tag3Value] [nvarchar](128) NULL,\r\n\t[Tag4Value] [nvarchar](128) NULL,\r\n\t[Message] [nvarchar](512) NULL,\r\n\t[InputValue] [float] NULL,\r\n\t[LimitValue] [float] NULL, \r\n\tAlarmClass [nvarchar](1000) NULL,\r\n\tDisabledDuration [int] NULL,\r\n\tSourceLong [nvarchar](512) NULL,\r\n\tSourceShort [nvarchar](512) NULL,\r\n\tEventAssociationID [uniqueidentifier] NULL\r\n\t)\r\n\r\n--GROUP BY SourceName\r\n\r\nINSERT INTO #temp3\r\nEXEC\t [dbo].[vpSSRSDisabledAlarms]\r\n\t\t@from_dt = @start,\r\n\t\t@to_dt = @end,\r\n\t\t@alarm = N'$AlarmFilter',\r\n\t\t@ServerName = N'FactoryTalk Linx',\r\n\t\t@LocalTime = @now,\r\n\t\t@TopicName = N'CookieLine'\r\nselect top 5 * from #temp3 order by DisabledDuration desc\r\nDrop table #temp3",
+          "refId": "A"
+        }
+      ],
+      "title": "被禁用的报警",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Alarm"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 504
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Severity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 85
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Priority"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 76
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Message"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 143
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 4,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "DECLARE\t@return_value int\r\nDECLARE @start datetime\r\nDECLARE @end datetime\r\nDECLARE @now datetime\r\nset @start = $__timeFrom();\r\nset @end = $__timeTo();\r\nset @now = getdate();\r\n\r\n\r\ncreate table #Temp1 (\t\t\r\n\tSuppressedTime [datetime2](7) NULL,\r\n\tUnsuppressedTime [datetime2](7) NULL,\r\n\tAlarm [nvarchar](512),\r\n\t[Severity] [int] NULL,\r\n\t[Priority] [int] NULL,\r\n\t[Tag1Value] [nvarchar](128) NULL,\r\n\t[Tag2Value] [nvarchar](128) NULL,\r\n\t[Tag3Value] [nvarchar](128) NULL,\r\n\t[Tag4Value] [nvarchar](128) NULL,\r\n\t[Message] [nvarchar](512) NULL,\r\n\t[InputValue] [float] NULL,\r\n\t[LimitValue] [float] NULL, \r\n\tAlarmClass [nvarchar](1000) NULL,\r\n\tSuppressedDuration [int] NULL,\r\n\tSourceLong [nvarchar](512) NULL,\r\n\tSourceShort [nvarchar](512) NULL,\r\n\tEventAssociationID [uniqueidentifier] NULL)\r\n\r\n--GROUP BY SourceName\r\n\r\nINSERT INTO #Temp1\r\nEXEC\t [dbo].[vpSSRSSuppressedAlarms]\r\n\t\t@from_dt = @start,\r\n\t\t@to_dt = @end,\r\n\t\t@alarm = N'$AlarmFilter',\r\n\t\t@ServerName = N'FactoryTalk Linx',\r\n\t\t@LocalTime = @now,\r\n\t\t@TopicName = N'CookieLine'\r\nselect top 5 * from #Temp1 order by SuppressedTime desc\r\n\r\n--DO NOT FORGET TO DROP THE TEMPLATE TABLE\r\nDROP TABLE #Temp1\r\n--SELECT\t'Return Value' = @return_value\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "被压制的报警",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 5,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "DECLARE\t@return_value int\r\nDECLARE @start datetime\r\nDECLARE @end datetime\r\nDECLARE @now datetime\r\nset @start = $__timeFrom();\r\nset @end = $__timeTo();\r\nset @now = getdate();\r\n\r\n\r\ncreate table #temp2 (\t\t\r\n\tShelved [datetime2](7) NULL,\r\n\tUnShelvedTime [datetime2](7) NULL,\r\n\tAutoUnshelveTime [datetime2](7) NULL,\r\n\tAlarm [nvarchar](512),\r\n\t[Severity] [int] NULL,\r\n\t[Priority] [int] NULL,\r\n\t[Tag1Value] [nvarchar](128) NULL,\r\n\t[Tag2Value] [nvarchar](128) NULL,\r\n\t[Tag3Value] [nvarchar](128) NULL,\r\n\t[Tag4Value] [nvarchar](128) NULL,\r\n\t[Message] [nvarchar](512) NULL,\r\n\t[InputValue] [float] NULL,\r\n\t[LimitValue] [float] NULL, \r\n\tAlarmClass [nvarchar](1000) NULL,\r\n\tShelvedDuration [int] NULL,\r\n\tSourceLong [nvarchar](512) NULL,\r\n\tSourceShort [nvarchar](512) NULL,\r\n\tEventAssociationID [uniqueidentifier] NULL\r\n\t)\r\n\r\n--GROUP BY SourceName\r\n\r\nINSERT INTO #temp2\r\nEXEC\t [dbo].[vpSSRSShelvedAlarms]\r\n\t\t@from_dt = @start,\r\n\t\t@to_dt = @end,\r\n\t\t@alarm = N'$AlarmFilter',\r\n\t\t@ServerName = N'FactoryTalk Linx',\r\n\t\t@LocalTime = @now,\r\n\t\t@TopicName = N'CookieLine'\r\nselect top 5 * from #temp2 order by ShelvedDuration desc\r\nDrop table #temp2",
+          "refId": "A"
+        }
+      ],
+      "title": "被忽略的报警",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "id": 2,
+      "panels": [],
+      "title": "Diagnostic Summary",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "my_mssql"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "left",
+            "displayMode": "color-background",
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue"
+              },
+              {
+                "color": "light-green",
+                "value": 80
+              },
+              {
+                "color": "super-light-red",
+                "value": 90
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "DeviceName"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 213
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Message"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 514
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 12,
+        "x": 0,
+        "y": 42
+      },
+      "id": 9,
+      "options": {
+        "footer": {
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mssql",
+            "uid": "my_mssql"
+          },
+          "format": "table",
+          "hide": false,
+          "rawSql": "SELECT TOP 15\n  [DeviceName]\n  ,[Message]\n  ,[EventTimeStamp]\n  FROM [FTAE].[dbo].[Diagnostic]\n  WHERE State = 1 and  [DeviceName] IN ( $ShortCut) and $__timeFilter(EventTimeStamp)\n  ORDER BY EventTimeStamp desc",
+          "refId": "A"
+        }
+      ],
+      "title": "Diagnostic Summary",
+      "transparent": true,
+      "type": "table"
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "AAlarm",
+          "value": "AAlarm"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "报警过滤器",
+        "multi": false,
+        "name": "AlarmFilter",
+        "options": [
+          {
+            "selected": false,
+            "text": "%",
+            "value": "%"
+          },
+          {
+            "selected": true,
+            "text": "AAlarm",
+            "value": "AAlarm"
+          },
+          {
+            "selected": false,
+            "text": "Fur",
+            "value": "Fur"
+          },
+          {
+            "selected": false,
+            "text": "Con",
+            "value": "Con"
+          },
+          {
+            "selected": false,
+            "text": "Rinse",
+            "value": "Rinse"
+          },
+          {
+            "selected": false,
+            "text": "Pick",
+            "value": "Pick"
+          },
+          {
+            "selected": false,
+            "text": "Takeup",
+            "value": "Takeup"
+          },
+          {
+            "selected": false,
+            "text": "Fur%AA",
+            "value": "Fur%AA"
+          },
+          {
+            "selected": false,
+            "text": "Con%AA",
+            "value": "Con%AA"
+          },
+          {
+            "selected": false,
+            "text": "Rinse%AA",
+            "value": "Rinse%AA"
+          },
+          {
+            "selected": false,
+            "text": "Pick%AA",
+            "value": "Pick%AA"
+          },
+          {
+            "selected": false,
+            "text": "Takeup%AA",
+            "value": "Takeup%AA"
+          },
+          {
+            "selected": false,
+            "text": "Fur%AA",
+            "value": "Fur%AA"
+          },
+          {
+            "selected": false,
+            "text": "Fur%DA",
+            "value": "Fur%DA"
+          },
+          {
+            "selected": false,
+            "text": "Con%DA",
+            "value": "Con%DA"
+          },
+          {
+            "selected": false,
+            "text": "Rinse%DA",
+            "value": "Rinse%DA"
+          },
+          {
+            "selected": false,
+            "text": "Pick%DA",
+            "value": "Pick%DA"
+          },
+          {
+            "selected": false,
+            "text": "Takeup%DA",
+            "value": "Takeup%DA"
+          },
+          {
+            "selected": false,
+            "text": "Fur%DA",
+            "value": "Fur%DA"
+          },
+          {
+            "selected": false,
+            "text": "DAlarm",
+            "value": "DAlarm"
+          }
+        ],
+        "query": "%,AAlarm,Fur,Con,Rinse,Pick,Takeup,Fur%AA,Con%AA,Rinse%AA,Pick%AA,Takeup%AA,Fur%AA,Fur%DA,Con%DA,Rinse%DA,Pick%DA,Takeup%DA,Fur%DA,DAlarm",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "mssql",
+          "uid": "my_mssql"
+        },
+        "definition": "SELECT DISTINCT  DeviceName  FROM [dbo].[Diagnostic]",
+        "hide": 0,
+        "includeAll": true,
+        "label": "设备名",
+        "multi": false,
+        "name": "ShortCut",
+        "options": [],
+        "query": "SELECT DISTINCT  DeviceName  FROM [dbo].[Diagnostic]",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "Asia/Shanghai",
+  "title": "报警",
+  "uid": "i1cvRhR4z",
+  "version": 138,
+  "weekStart": ""
+}

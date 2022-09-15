@@ -15,8 +15,8 @@ services:
       - DOCKER_INFLUXDB_INIT_USERNAME=admin
       - DOCKER_INFLUXDB_INIT_PASSWORD=BekaertRockwell
       - DOCKER_INFLUXDB_INIT_ORG=ra
-      - DOCKER_INFLUXDB_INIT_BUCKET=test1
-      - DOCKER_INFLUXDB_INIT_RETENTION=3d
+      - DOCKER_INFLUXDB_INIT_BUCKET=ISC1
+      - DOCKER_INFLUXDB_INIT_RETENTION=14d
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=U0pdAvYrUbJMPvnD8YZjkm9d8KCVHpeBEe1_LiVlQImsr98ERFRrYKge1hsZVeht_VfEAixTkgsAi6B85lax-Q==
     networks:
       bridge:
@@ -27,7 +27,7 @@ services:
     extra_hosts:
       - "influx:172.16.0.2"
     volumes:
-      - /etc/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
     depends_on:
       - influxdb
       - grafana
@@ -43,6 +43,7 @@ services:
       - "3000:3000"
     volumes:
       - grafana_data:/var/lib/grafana # data path
+      - ./grafana/provisioning:/etc/grafana/provisioning
     environment:
       #- GF_INSTALL_PLUGINS=${GF_INSTALL_PLUGINS}
       - GF_SECURITY_ADMIN_USER=admin
