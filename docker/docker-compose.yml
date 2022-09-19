@@ -5,8 +5,8 @@ services:
     container_name: influxdb2
     restart: always
     volumes:
-      - db:/var/lib/influxdb2
-      - db_cfg:/etc/influxdb2
+      - db:/var/lib/influxdb2  #data for influxdb, if you are in Linux system, use the host folder /var/lib/influxdb2 is ok
+      - db_cfg:/etc/influxdb2  #Config for influxdb, if you are in Linux system, use the host folder /etc/influxdb2 is ok
     ports:
       - 8086:8086
 
@@ -42,7 +42,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - grafana_data:/var/lib/grafana # data path
+      - grafana_data:/var/lib/grafana # data path , if you are in Linux system, use the host folder /var/lib/grafana is ok
       - ./grafana/provisioning:/etc/grafana/provisioning
     environment:
       #- GF_INSTALL_PLUGINS=${GF_INSTALL_PLUGINS}
