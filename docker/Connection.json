@@ -1,49 +1,32 @@
 {
-  "url": "http://influx:8086",
+  "url": "http://localhost:8086",
   "org": "ra",
   "token": "U0pdAvYrUbJMPvnD8YZjkm9d8KCVHpeBEe1_LiVlQImsr98ERFRrYKge1hsZVeht_VfEAixTkgsAi6B85lax-Q==",
   "bucket": "test",
   "debug": true,
   "plcs":
-    [
-      {
-        "connection": "eip://192.168.1.11?backplane=1",
-        "interval": 1000,
-        "plcTags":
-          [
-            {
-              "name": "a_sin[0]",
-              "length": 2,
-              "iTags": {
-                "name1": "a1",
-                "name2": "a2"
-              }
-            },
-            {
-              "name": "a_sin[50]",
-              "length": 2,
-              "iTags": {
-                "name1": "a1",
-                "name2": "a2"
-              }
-            },
-            {
-              "name": "a_sin[100]",
-              "length": 2,
-              "iTags": {
-                "name1": "a1",
-                "name2": "a2"
-              }
-            },
-            {
-              "name": "a_sin[150]",
-              "length": 2,
-              "iTags": {
-                "name1": "a1",
-                "name2": "a2"
-              }
-            }
-        ]
-      }
-    ]
+  [
+    {
+      "connection": "eip://192.168.1.31?backplane=1",
+      "measurement": "L3100ERMS2",
+      "interval": 1000,
+      "plcTags":
+      [
+        {
+          "name": "a_sin[0]",
+          "length": 2,
+          "datatype": "REAL",
+          "influxFields": ["test1","test2"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        },
+        {
+          "name": "a_sin[50]",
+          "length": 2,
+          "datatype": "REAL",
+          "influxFields": ["test3","test4"],
+          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+        }
+      ]
+    }
+  ]
 }

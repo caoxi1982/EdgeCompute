@@ -16,13 +16,11 @@ public class ReadConfig {
 			// create a reader
 			Reader reader;
 			Path path = Paths.get("var","lib", "Connection.json");
-			if (Files.exists(path)) {
-				reader = Files.newBufferedReader(path);
+			if (!Files.exists(path)) {
+				path = Paths.get("C:\\myGitHub\\ra_plc4x_influx\\influxdb\\src\\main\\resources\\Connection.json");
+				log.debug("{}",path.toString());
 			}
-			else {
-				path =Paths.get("influxdb","src","main","resources", "Connection.json");
-				reader = Files.newBufferedReader(path);
-			}
+			reader = Files.newBufferedReader(path);
 			Gson gson = new Gson();
 			// convert JSON string to User object
 			Config config = gson.fromJson(reader, Config.class);

@@ -13,7 +13,7 @@ public class App
     {
         Config cfg = ReadConfig.read();
         log.debug("{}",cfg);
-        Trigger example = new Trigger();
-        example.run(cfg);
+        Trigger example = new Trigger(cfg);
+        example.run();
     }
 }
