@@ -70,7 +70,6 @@
       <version>2.9.0</version>
     </dependency>
   </dependencies>
-
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
@@ -89,7 +88,6 @@
             </archive>
           </configuration>
         </plugin>
-
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
@@ -108,34 +106,6 @@
             </execution>
           </executions>
         </plugin>
-<!--        <plugin>-->
-<!--          <groupId>org.apache.maven.plugins</groupId>-->
-<!--          <artifactId>maven-assembly-plugin</artifactId>-->
-<!--          <version>3.3.0</version>-->
-<!--          <configuration>-->
-<!--            &lt;!&ndash; get all project dependencies &ndash;&gt;-->
-<!--            <descriptorRefs>-->
-<!--              <descriptorRef>jar-with-dependencies</descriptorRef>-->
-<!--            </descriptorRefs>-->
-<!--            &lt;!&ndash; MainClass in mainfest make a executable jar &ndash;&gt;-->
-<!--            <archive>-->
-<!--              <manifest>-->
-<!--                <mainClass>com.ra.demo.plc4x.App</mainClass>-->
-<!--              </manifest>-->
-<!--            </archive>-->
-<!--            <appendAssemblyId>true</appendAssemblyId>-->
-<!--          </configuration>-->
-<!--          <executions>-->
-<!--            <execution>-->
-<!--              <id>make-assembly</id>-->
-<!--              &lt;!&ndash; bind to the packaging phase, here why I can not bind ,and always need command assembly:single &ndash;&gt;-->
-<!--              <phase>package</phase>-->
-<!--              <goals>-->
-<!--                <goal>single</goal>-->
-<!--              </goals>-->
-<!--            </execution>-->
-<!--          </executions>-->
-<!--        </plugin>-->
       </plugins>
     </pluginManagement>
     <plugins>
