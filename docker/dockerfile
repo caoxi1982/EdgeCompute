@@ -1,4 +1,5 @@
-FROM openjdk:11.0.15
+#FROM openjdk:11.0.15
+FROM openjdk:11-jre
 RUN apt update && apt install inetutils-ping
 COPY . /var/lib
 EXPOSE 8080

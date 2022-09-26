@@ -17,8 +17,8 @@ public class ReadConfig {
 			Reader reader;
 			Path path = Paths.get("var","lib", "Connection.json");
 			if (!Files.exists(path)) {
-				path = Paths.get("C:\\myGitHub\\ra_plc4x_influx\\influxdb\\src\\main\\resources\\Connection.json");
-				log.debug("{}",path.toString());
+				path = Paths.get("C:\\myGitHub\\EdgeCompute\\influxdb\\src\\main\\resources\\Connection.json");
+				log.debug("{}",path);
 			}
 			reader = Files.newBufferedReader(path);
 			Gson gson = new Gson();
@@ -35,7 +35,7 @@ public class ReadConfig {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			log.error(ex.getMessage());
-			//System.exit(0);
+			System.exit(0);
 			return null;
 		}
 	}

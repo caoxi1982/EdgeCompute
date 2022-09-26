@@ -56,7 +56,7 @@ services:
       bridge:
         ipv4_address: 172.16.0.5
   cip:
-    image: coabbb/ra:1.0.0
+    image: coabbb/ra:1.0.1
     container_name: mycip
     stdin_open: true
     tty: true

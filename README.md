@@ -72,7 +72,7 @@
 ## Docker镜像制作
 进入docker文件夹，运行下面的命令可以产生Ethernet/IP驱动的docker镜像文件
 ```shell
-docker build .
+docker build -t mycip:0.0.1 .
 ```
 或者去docker hub下载
 ```shell
@@ -127,16 +127,16 @@ datasources:
 
 使用Ethernet/IP驱动执行：
 ```shell
-docker composer up cip
+docker compose up cip
 ```
 
 使用OPC UA驱动执行：
 ```shell
-docker composer up opcua
+docker compose up opcua
 ```
 同时启动：
 ```shell
-docker composer up
+docker compose up
 ```
 
 
