@@ -60,13 +60,32 @@
   例如test1，test2 分别是a_sin[0],a_sin[1]在数据库中的名字
   - influxTags 该PLC标签在InfluxDB的对应Measurement中索引Tag的键值对，这里不能为每个数组中的元素分配不同的索引
 
-<span style="color:pink">some *blue* text</span>
+<span style="color:#F75D59">*influxFields属性可以对数组中不同的元素分配不同的名字，同时在PLC程序中增加MOV指令将需要采集的数据整理到同一个数组中
+可以有效的提供EIP驱动的采集效率（即采样间隔）。在PLC4X中数组的目前最大长度为50。*</span>
+
+<span style="color:#F75D59">*L8x 最大为2000 package/秒*</span>
+
+<span style="color:#F75D59">*L7x 最大为400 package/秒*</span>
+
 ## Docker File
+进入docker文件夹，运行下面的命令可以产生Ethernet/IP驱动的docker镜像文件
+```shell
+docker build .
+```
+或者去docker hub下载
+```shell
+docker push coabbb/ra
+```
+
 ## OPC UA驱动
 
-Depending on the programming language, the usage will differ, therefore please go to the
-[Getting Started](https://plc4x.apache.org/users/gettingstarted.html) on the PLC4X website to look up
-the language of choice.
+示例中同时提供了采用telegraf的OPC UA驱动来进行数据采集的配置文件；
+
+需要配置的部分为
+- [agent]
+- [[outputs.influxdb_v2]]
+- [[inputs.opcua.group]]
+详情可参考[Telegraf的帮助](https://github.com/influxdata/telegraf)
 
 ## Connect to InfluxDB v2
 ## Visualization
