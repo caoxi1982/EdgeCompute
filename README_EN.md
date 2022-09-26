@@ -4,17 +4,17 @@
    <img src="./EdgeReadmeImage.png" alt="Edge Compute Logo" title="Edge Compute Logo"/>
   <br>
 </h1>
-<h3 align="center">工业边缘计算示例</h3>
-<h4 align="center">本示例抽取AB PLC中标签的数据，存储，并已看板的形式展现
+<h3 align="center">The Industrial Edge Application Demo</h3>
+<h4 align="center">The application extract the data from rockwell plc ,then store and dashboard the data
 </h4>
 
 
 this is a Demo of read tags from CLX or CMX ,then write to influxDB 
-* [CIP驱动](#CIP Driver)
-* [Docker镜像制作](#Docker File)
-* [Connect实时数据库](#Connect to InfluxDB v2)
-* [看板展示](#Visualization)
-* [Docker编排](#Docker Composer)
+* [CIP Driver](#CIP Driver)
+* [Docker File](#Docker File)
+* [Connect to InfluxDB v2](#Connect to InfluxDB v2)
+* [Visualization](#Visualization)
+* [Docker Composer](#Docker Composer)
 
 
 ***
