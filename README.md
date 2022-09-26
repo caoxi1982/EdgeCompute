@@ -1,7 +1,7 @@
 # Edge Compute
 <h1 align="center">
   <br>
-   <img src="./EdgeReadmeImage.png" alt="Edge Compute Logo" title="Edge Compute Logo"/>
+   <img src="./EdgeReadmeImage.png" alt="Edge Compute Logo" title="Edge Compute Logo" width="60%" height="30%"/>
   <br>
 </h1>
 <h3 align="center">工业边缘计算示例</h3>
@@ -12,6 +12,9 @@
 边缘计算是相对于集中式的数据中心，或是云端服务器的概念，它更接近于PLC或是现场OT层的数据。利用各种工业现场的通讯协议能够更直接
 的提供高密度的数据采样，进而提供实时性更高，更准确的反馈给到现场设备。目前这个实例中我们主要呈现前一部分的内容：借助于开源的InfluxDB和Grafana
 进行高密度的数据采集及其呈现。第二部分的内容目前更多的以专机的形式出现：比如罗克韦尔的集成CIP的震动检测单元。这里不做讨论。
+
+本示例提供了基于docker 的一键启动，当然也可以按需求将各个部分分别安装
+
 ***
 
 * [Ethernet/IP驱动](#Ethernet/IP驱动)
@@ -88,6 +91,55 @@ docker push coabbb/ra
 详情可参考[Telegraf的帮助](https://github.com/influxdata/telegraf)
 
 ## Connect实时数据库
+
+本示例中将InfluxDB v2作为时间序列数据的存储工具，通过对Ethernet/IP驱动的JSON配置文件的设置，Telegraf中OutPut
+插件的设置来写入数据，同时在Grafana中配置InfluxDB v2的数据源来做数据呈现
+
 ## Grafana看板展示
+
+本示例中使用Grafana作为数据呈现的工具，并使用[Provision](https://grafana.com/docs/grafana/latest/administration/provisioning/)预制了数据源和一些看板。
+在这里我们除了需要按手册配置InfluxDB的数据连接，还需要连接Rockwell FactoryTalk Alarm And Event的数据库，并导入相关的ISA18.2
+报表的MS SQL存储过程，具体SQL请联系Rockwell技术支持
+
+```shell
+datasources:
+  - name: MSSQL
+    type: mssql
+    uid: my_mssql
+    url: 192.168.248.40:1433
+    database: AlarmEvent
+    user: sa
+    jsonData:
+      maxOpenConns: 0 # Grafana v5.4+
+      maxIdleConns: 2 # Grafana v5.4+
+      connMaxLifetime: 14400 # Grafana v5.4+
+    secureJsonData:
+      password: '123'
+```
+- uid是这个数据源在grafana实例中的编码，将被看板中的所有SQL查询语句所引用
+- url为FactoryTalk Alarm And Event的服务器IP地址或域名<span style="color:red">*注意开通TCP访问及响应端口（默认1433）*</span>
+- FactoryTalk Alarm And Event service 的数据库连接参数需要提供给属性database，user，password
+
 ## Docker编排
+
+本示例可以支持Docker Composer的意见启动
+但是docker使用了windows环境中的docker desktop，如果是Linux下的docker环境需要根据实际情况更改一些绑定目路的地址
+具体已在[docker-composer.yml](./docker/docker-compose.yml)中标注
+
+使用Ethernet/IP驱动执行：
+```shell
+docker composer up cip
+```
+
+使用OPC UA驱动执行：
+```shell
+docker composer up opcua
+```
+同时启动：
+```shell
+docker composer up
+```
+
+
+
 
