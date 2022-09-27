@@ -1,30 +1,323 @@
 {
-  "url": "http://influx:8086",
+  "url": "http://localhost:8086",
   "org": "ra",
   "token": "U0pdAvYrUbJMPvnD8YZjkm9d8KCVHpeBEe1_LiVlQImsr98ERFRrYKge1hsZVeht_VfEAixTkgsAi6B85lax-Q==",
-  "bucket": "test",
-  "debug": true,
+  "bucket": "ISC1",
+  "debug": false,
   "plcs":
   [
     {
       "connection": "eip://192.168.1.31?backplane=1",
-      "measurement": "L3100ERMS2",
+      "measurement": "PLC",
       "interval": 1000,
-      "plcTags":
-      [
+      "plcTags": [
         {
-          "name": "a_sin[0]",
-          "length": 2,
+          "name": "CPUCoreControl",
+          "length": 1,
           "datatype": "REAL",
-          "influxFields": ["test1","test2"],
-          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+          "influxFields": [
+            "CpuControl"
+          ],
+          "influxTags": {
+            "Part": "PLC_Utility"
+          }
         },
         {
-          "name": "a_sin[50]",
-          "length": 2,
+          "name": "CPUCoreUnknown",
+          "length": 1,
           "datatype": "REAL",
-          "influxFields": ["test3","test4"],
-          "influxTags": { "location": "PayOff", "parameter": "Speed" }
+          "influxFields": [
+            "CpuUnknown"
+          ],
+          "influxTags": {
+            "Part": "PLC_Utility"
+          }
+        },
+        {
+          "name": "CPUCoreCommClass3",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "CpuClass3"
+          ],
+          "influxTags": {
+            "Part": "PLC_Utility"
+          }
+        },
+        {
+          "name": "CPUCoreCommClass1",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "CpuClass1"
+          ],
+          "influxTags": {
+            "Part": "PLC_Utility"
+          }
+        },
+        {
+          "name": "CPUIdle",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "CpuIdle"
+          ],
+          "influxTags": {
+            "Part": "PLC_Utility"
+          }
+        },
+        {
+          "name": "CPUCoreControlMotion",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "CpuControlMotion"
+          ],
+          "influxTags": {
+            "Part": "PLC_Utility"
+          }
+        },
+        {
+          "name": "TaskPercentage[1]",
+          "length": 3,
+          "datatype": "REAL",
+          "influxFields": [
+            "TaskAlarmEmulate",
+            "TaskMotion",
+            "TaskNew"
+          ],
+          "influxTags": {
+            "Part": "PLC_Utility"
+          }
+        }
+      ]
+    },
+    {
+      "connection": "eip://192.168.1.31?backplane=1",
+      "measurement": "Machines",
+      "interval": 1000,
+      "plcTags": [
+        {
+          "name": "AlarmsConditionerAAlarm1[1]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "ConditionerTemp1"
+          ],
+          "influxTags": {
+            "Part": "Conditioner",
+            "Sensor": "Temperature"
+          }
+        },
+        {
+          "name": "AlarmsConditionerAAlarm1[2]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "ConditionerPH"
+          ],
+          "influxTags": {
+            "Part": "Conditioner",
+            "Sensor": "PH"
+          }
+        },
+        {
+          "name": "AlarmsConditionerAAlarm1[3]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "ConditionerTemp2"
+          ],
+          "influxTags": {
+            "Part": "Conditioner",
+            "Sensor": "Temperature"
+          }
+        },
+        {
+          "name": "AlarmsConditionerAAlarm1[4]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "ConditionerFlow"
+          ],
+          "influxTags": {
+            "Part": "Conditioner",
+            "Sensor": "Flow"
+          }
+        },
+        {
+          "name": "AlarmsFuranceAAlarm1[1]",
+          "length": 4,
+          "datatype": "REAL",
+          "influxFields": [
+            "FuranceZone1Temp",
+            "FuranceZone2Temp",
+            "FuranceZone3Temp",
+            "FuranceZone4Temp"
+          ],
+          "influxTags": {
+            "Part": "Furnace",
+            "Sensor": "Temperature"
+          }
+        },
+        {
+          "name": "AlarmsFuranceAAlarm1[0]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "FurancePressure"
+          ],
+          "influxTags": {
+            "Part": "Furnace",
+            "Sensor": "Pressure"
+          }
+        },
+        {
+          "name": "AlarmsPickingAAlarm1[1]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "PickingTemp1"
+          ],
+          "influxTags": {
+            "Part": "Picking",
+            "Sensor": "Temperature"
+          }
+        },
+        {
+          "name": "AlarmsPickingAAlarm1[2]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "PickingPH"
+          ],
+          "influxTags": {
+            "Part": "Picking",
+            "Sensor": "PH"
+          }
+        },
+        {
+          "name": "AlarmsPickingAAlarm1[3]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "PickingTemp2"
+          ],
+          "influxTags": {
+            "Part": "Picking",
+            "Sensor": "Temperature"
+          }
+        },
+        {
+          "name": "AlarmsPickingAAlarm1[4]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "PickingFlow"
+          ],
+          "influxTags": {
+            "Part": "Picking",
+            "Sensor": "Flow"
+          }
+        },
+        {
+          "name": "AlarmsRinsingAAlarm1[1]",
+          "length": 3,
+          "datatype": "REAL",
+          "influxFields": [
+            "RinsingTemp1",
+            "RinsingTemp2",
+            "RinsingTemp3"
+          ],
+          "influxTags": {
+            "Part": "Rinsing",
+            "Sensor": "Temperature"
+          }
+        },
+        {
+          "name": "AlarmsRinsingAAlarm1[4]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "RinsingPressure"
+          ],
+          "influxTags": {
+            "Part": "Rinsing",
+            "Sensor": "Pressure"
+          }
+        },
+        {
+          "name": "AlarmsTakeupAAlarm1[1]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "TakeUpP1Speed"
+          ],
+          "influxTags": {
+            "Part": "Takeup",
+            "Sensor": "Speed"
+          }
+        },
+        {
+          "name": "AlarmsTakeupAAlarm1[2]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "TakeUpP1Current"
+          ],
+          "influxTags": {
+            "Part": "Takeup",
+            "Sensor": "Current"
+          }
+        },
+        {
+          "name": "AlarmsTakeupAAlarm1[3]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "TakeUpP2Speed"
+          ],
+          "influxTags": {
+            "Part": "Takeup",
+            "Sensor": "Speed"
+          }
+        },
+        {
+          "name": "AlarmsTakeupAAlarm1[4]",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "TakeUpP2Current"
+          ],
+          "influxTags": {
+            "Part": "Takeup",
+            "Sensor": "Current"
+          }
+        }
+      ]
+    },
+    {
+      "connection": "eip://192.168.1.31?backplane=1",
+      "measurement": "Energy",
+      "interval": 1000,
+      "plcTags": [
+        {
+          "name": "SimPowerConsumption",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "PowerConsumption"
+          ],
+          "influxTags": {}
+        },
+        {
+          "name": "SimGasConsumption",
+          "length": 1,
+          "datatype": "REAL",
+          "influxFields": [
+            "GasConsumption"
+          ],
+          "influxTags": {}
         }
       ]
     }

@@ -86,6 +86,7 @@ docker push coabbb/ra
 需要配置的部分为
 - [agent]
 - [[outputs.influxdb_v2]]
+- [[inputs.opcua]]
 - [[inputs.opcua.group]]
 详情可参考[Telegraf的帮助](https://github.com/influxdata/telegraf)
 
@@ -121,7 +122,7 @@ datasources:
 
 ## Docker编排
 
-本示例可以支持Docker Composer的意见启动
+本示例可以支持Docker Composer的一键启动
 但是docker使用了windows环境中的docker desktop，如果是Linux下的docker环境需要根据实际情况更改一些绑定目路的地址
 具体已在[docker-composer.yml](./docker/docker-compose.yml)中标注
 
