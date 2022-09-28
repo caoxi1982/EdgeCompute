@@ -13,7 +13,7 @@ services:
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=admin
-      - DOCKER_INFLUXDB_INIT_PASSWORD=rockwell
+      - DOCKER_INFLUXDB_INIT_PASSWORD=rockwellautomation
       - DOCKER_INFLUXDB_INIT_ORG=ra
       - DOCKER_INFLUXDB_INIT_BUCKET=ISC1
       - DOCKER_INFLUXDB_INIT_RETENTION=14d
@@ -47,7 +47,7 @@ services:
     environment:
       #- GF_INSTALL_PLUGINS=${GF_INSTALL_PLUGINS}
       - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=rockwell
+      - GF_SECURITY_ADMIN_PASSWORD=rockwellautomation
     extra_hosts:
       - "influx:172.16.0.2"
     depends_on:
