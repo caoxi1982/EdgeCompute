@@ -102,7 +102,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "9.0.2",
+      "pluginVersion": "9.0.7",
       "targets": [
         {
           "alias": "",
@@ -1203,7 +1203,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "9.0.2",
+      "pluginVersion": "9.0.7",
       "targets": [
         {
           "datasource": {
@@ -1211,7 +1211,7 @@
             "uid": "my_influxdb2"
           },
           "hide": false,
-          "query": "from(bucket: \"ISC1\")\r\n  |> range(start: -1h, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Machines\")\r\n  |> filter(fn: (r) => r[\"Part\"] == \"${GroupPath}\")\r\n  |> filter(fn: (r) => r[\"_field\"] != \"Quality\")\r\n  |> last()\r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n ",
+          "query": "from(bucket: \"ISC1\")\r\n  |> range(start: -1h, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Machines\" and r[\"host\"] == \"${Host}\")\r\n  |> filter(fn: (r) => r[\"Part\"] == \"${GroupPath}\")\r\n  |> filter(fn: (r) => r[\"_field\"] != \"Quality\")\r\n  |> last()\r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n ",
           "refId": "A"
         }
       ],
@@ -1435,7 +1435,7 @@
             "uid": "my_influxdb2"
           },
           "hide": false,
-          "query": "from(bucket: \"ISC1\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Machines\")\r\n  |> filter(fn: (r) => r[\"Part\"] == \"${GroupPath}\")\r\n  |> filter(fn: (r) => r[\"_field\"] != \"Quality\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"ISC1\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Machines\" and r[\"host\"] == \"${Host}\")\r\n  |> filter(fn: (r) => r[\"Part\"] == \"${GroupPath}\")\r\n  |> filter(fn: (r) => r[\"_field\"] != \"Quality\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
@@ -1520,7 +1520,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "9.0.2",
+      "pluginVersion": "9.0.7",
       "targets": [
         {
           "alias": "",
@@ -1611,11 +1611,34 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "5b9bd7a4757e",
+          "value": "5b9bd7a4757e"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "my_influxdb2"
+        },
+        "definition": "import \"influxdata/influxdb/schema\"\r\n\r\nschema.tagValues(bucket: \"ISC1\", start: -1s, tag: \"host\")",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "Host",
+        "options": [],
+        "query": "import \"influxdata/influxdb/schema\"\r\n\r\nschema.tagValues(bucket: \"ISC1\", start: -1s, tag: \"host\")",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
