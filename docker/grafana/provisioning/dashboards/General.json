@@ -212,7 +212,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT\n  City,Latitude,Longitude,(Availability/100)*(Quality/100)*(performance/100) as OEE, Volume,timestamp,id\nFROM\n  [FTAE].[dbo].[SimulateMap]",
+          "rawSql": "SELECT\n  City,Latitude,Longitude,(Availability/100)*(Quality/100)*(performance/100) as OEE, Volume,timestamp,id\nFROM\n  [dbo].[SimulateMap]",
           "refId": "A"
         }
       ],
@@ -275,7 +275,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT\n  City\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "rawSql": "SELECT\n  City\nFROM\n  [dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
           "refId": "A"
         }
       ],
@@ -309,7 +309,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
           "refId": "A"
         }
       ],
@@ -530,7 +530,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT\n  City\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "rawSql": "SELECT\n  City\nFROM\n  [dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
           "refId": "A"
         }
       ],
@@ -598,7 +598,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
           "refId": "A"
         }
       ],
@@ -633,7 +633,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
           "refId": "A"
         }
       ],
@@ -734,7 +734,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT\n  Availability,Quality,performance\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "rawSql": "SELECT\n  Availability,Quality,performance\nFROM\n  [dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
           "refId": "A"
         }
       ],
@@ -768,7 +768,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "rawSql": "SELECT\n  (Availability*Quality*performance)/10000 as OEE\nFROM\n  [dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
           "refId": "A"
         }
       ],
@@ -802,7 +802,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT\n  City\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
+          "rawSql": "SELECT\n  City\nFROM\n  [dbo].[SimulateMap]\nWHERE\n  id = $ID\n",
           "refId": "A"
         }
       ],
@@ -870,7 +870,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT\n  PowerConsumption\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n\n",
+          "rawSql": "SELECT\n  PowerConsumption\nFROM\n  [dbo].[SimulateMap]\nWHERE\n  id = $ID\n\n",
           "refId": "A"
         }
       ],
@@ -940,7 +940,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT\n  GasConsumption\nFROM\n  [FTAE].[dbo].[SimulateMap]\nWHERE\n  id = $ID\n\n",
+          "rawSql": "SELECT\n  GasConsumption\nFROM\n  [dbo].[SimulateMap]\nWHERE\n  id = $ID\n\n",
           "refId": "A"
         }
       ],
