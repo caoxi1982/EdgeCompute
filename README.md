@@ -1,7 +1,7 @@
 # Edge Compute
 <h1 align="center">
   <br>
-   <img src="./EdgeReadmeImage.png" alt="Edge Compute Logo" title="Edge Compute Logo" width="60%" height="30%"/>
+   <img src="./img/EdgeReadmeImage.png" alt="Edge Compute Logo" title="Edge Compute Logo" width="60%" height="30%"/>
   <br>
 </h1>
 <h3 align="center">工业边缘计算示例</h3>
@@ -99,7 +99,25 @@ docker push coabbb/ra
 
 本示例中使用Grafana作为数据呈现的工具，并使用[Provision](https://grafana.com/docs/grafana/latest/administration/provisioning/)预制了数据源和一些看板。
 在这里我们除了需要按手册配置InfluxDB的数据连接，还需要连接Rockwell FactoryTalk Alarm And Event的数据库，并导入相关的ISA18.2
-报表的MS SQL存储过程，具体SQL请联系Rockwell技术支持
+报表的[MS SQL存储过程](./sql/FTA_SSRS_Reports_Deployment_ScriptWithSimulate.sql)
+
+同时需要完成FactoryTalk Alarm And Event Server中的一些配置
+- 在MS SQL中建立一个数据库并在FactoryTalk Dictionary中添加
+
+  <img src="./img/createDatabase.png" alt="Edge Compute Logo" title="Edge Compute Logo" width="60%" height="30%"/>
+- 给项目添加一个FactoryTalk Alarm And Event Server，并使能他的报警历史数据存储功能
+
+  <img src="./img/EnableHistory.png" alt="Edge Compute Logo" title="Edge Compute Logo" width="60%" height="30%"/>
+
+- 修改[MS SQL存储过程](./sql/FTA_SSRS_Reports_Deployment_ScriptWithSimulate.sql)中的数据库名（Line 5）
+```shell
+USE "AlarmEvent"
+```
+
+- 如果需要同时使用FactoryTalk Diagnosticsd的诊断信息统计需要在FactoryTalk Administrator Console->tool 中使能ODBC
+
+  <img src="./img/SettingDiagnostics.png" alt="Edge Compute Logo" title="Edge Compute Logo" width="60%" height="30%"/>
+
 
 ```shell
 datasources:

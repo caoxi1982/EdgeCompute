@@ -1,5 +1,0 @@
- #to run the image of plc4x,-v mount file is also ok
- docker run --rm  --name mytest --add-host=influx:172.17.0.2 -v c:\\C.json:/var/lib/Connection.json -it ra:test3 /bin/sh
- #to run the image of influxdb 2
- docker run -d -p 8086:8086 --ip 172.17.0.2 --name influxdb2 -v db:/var/lib/influxdb2 influxdb
-
