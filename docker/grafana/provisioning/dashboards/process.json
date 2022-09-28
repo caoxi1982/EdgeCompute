@@ -1530,7 +1530,7 @@
           },
           "format": "table",
           "hide": false,
-          "rawSql": "SELECT \n  [DeviceName]\n  ,[Message]\n  ,[EventTimeStamp]\n  FROM [FTAE].[dbo].[Diagnostic]\n  WHERE State = 1 and  [DeviceName] IN ( $ShortCut) and $__timeFilter(EventTimeStamp)\n  ORDER BY EventTimeStamp",
+          "rawSql": "SELECT \n  [DeviceName]\n  ,[Message]\n  ,[EventTimeStamp]\n  FROM [dbo].[Diagnostic]\n  WHERE State = 1 and  [DeviceName] IN ( $ShortCut) and $__timeFilter(EventTimeStamp)\n  ORDER BY EventTimeStamp",
           "refId": "A"
         }
       ],
