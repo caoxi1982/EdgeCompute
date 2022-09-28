@@ -1613,27 +1613,11 @@
         "type": "query"
       },
       {
-        "current": {
-          "selected": true,
-          "text": "5b9bd7a4757e",
-          "value": "5b9bd7a4757e"
-        },
-        "datasource": {
-          "type": "influxdb",
-          "uid": "my_influxdb2"
-        },
-        "definition": "import \"influxdata/influxdb/schema\"\r\n\r\nschema.tagValues(bucket: \"ISC1\", start: -1s, tag: \"host\")",
-        "hide": 0,
-        "includeAll": false,
-        "multi": false,
+        "hide": 2,
         "name": "Host",
-        "options": [],
-        "query": "import \"influxdata/influxdb/schema\"\r\n\r\nschema.tagValues(bucket: \"ISC1\", start: -1s, tag: \"host\")",
-        "refresh": 1,
-        "regex": "",
+        "query": "telegraf",
         "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
+        "type": "constant"
       }
     ]
   },
@@ -1653,6 +1637,6 @@
   "timezone": "",
   "title": "工艺",
   "uid": "AU_HmbR4k",
-  "version": 107,
+  "version": 116,
   "weekStart": ""
 }
