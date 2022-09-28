@@ -118,7 +118,7 @@ USE "AlarmEvent"
 
   <img src="./img/SettingDiagnostics.png" alt="Edge Compute Logo" title="Edge Compute Logo" width="60%" height="30%"/>
 
-
+- uid是这个数据源在grafana实例中的编码，将被看板中的所有SQL查询语句所引用
 ```shell
 datasources:
   - name: MSSQL
@@ -134,7 +134,7 @@ datasources:
     secureJsonData:
       password: '123'
 ```
-- uid是这个数据源在grafana实例中的编码，将被看板中的所有SQL查询语句所引用
+
 - url为FactoryTalk Alarm And Event的服务器IP地址或域名<span style="color:red">*注意开通TCP访问及响应端口（默认1433）*</span>
 - FactoryTalk Alarm And Event service 的数据库连接参数需要提供给属性database，user，password
 
