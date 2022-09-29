@@ -1,5 +1,5 @@
 {
-  "url": "http://localhost:8086",
+  "url": "http://influx:8086",
   "org": "ra",
   "token": "U0pdAvYrUbJMPvnD8YZjkm9d8KCVHpeBEe1_LiVlQImsr98ERFRrYKge1hsZVeht_VfEAixTkgsAi6B85lax-Q==",
   "bucket": "ISC1",
@@ -19,7 +19,8 @@
             "CpuControl"
           ],
           "influxTags": {
-            "Part": "PLC_Utility"
+            "Part": "PLC_Utility",
+            "host": "telegraf"
           }
         },
         {
@@ -30,7 +31,8 @@
             "CpuUnknown"
           ],
           "influxTags": {
-            "Part": "PLC_Utility"
+            "Part": "PLC_Utility",
+            "host": "telegraf"
           }
         },
         {
@@ -41,7 +43,8 @@
             "CpuClass3"
           ],
           "influxTags": {
-            "Part": "PLC_Utility"
+            "Part": "PLC_Utility",
+            "host": "telegraf"
           }
         },
         {
@@ -52,7 +55,8 @@
             "CpuClass1"
           ],
           "influxTags": {
-            "Part": "PLC_Utility"
+            "Part": "PLC_Utility",
+            "host": "telegraf"
           }
         },
         {
@@ -63,7 +67,8 @@
             "CpuIdle"
           ],
           "influxTags": {
-            "Part": "PLC_Utility"
+            "Part": "PLC_Utility",
+            "host": "telegraf"
           }
         },
         {
@@ -74,7 +79,8 @@
             "CpuControlMotion"
           ],
           "influxTags": {
-            "Part": "PLC_Utility"
+            "Part": "PLC_Utility",
+            "host": "telegraf"
           }
         },
         {
@@ -87,7 +93,8 @@
             "TaskNew"
           ],
           "influxTags": {
-            "Part": "PLC_Utility"
+            "Part": "PLC_Utility",
+            "host": "telegraf"
           }
         }
       ]
@@ -106,7 +113,8 @@
           ],
           "influxTags": {
             "Part": "Conditioner",
-            "Sensor": "Temperature"
+            "Sensor": "Temperature",
+            "host": "telegraf"
           }
         },
         {
@@ -118,7 +126,8 @@
           ],
           "influxTags": {
             "Part": "Conditioner",
-            "Sensor": "PH"
+            "Sensor": "PH",
+            "host": "telegraf"
           }
         },
         {
@@ -130,7 +139,8 @@
           ],
           "influxTags": {
             "Part": "Conditioner",
-            "Sensor": "Temperature"
+            "Sensor": "Temperature",
+            "host": "telegraf"
           }
         },
         {
@@ -142,7 +152,8 @@
           ],
           "influxTags": {
             "Part": "Conditioner",
-            "Sensor": "Flow"
+            "Sensor": "Flow",
+            "host": "telegraf"
           }
         },
         {
@@ -157,7 +168,8 @@
           ],
           "influxTags": {
             "Part": "Furnace",
-            "Sensor": "Temperature"
+            "Sensor": "Temperature",
+            "host": "telegraf"
           }
         },
         {
@@ -169,7 +181,8 @@
           ],
           "influxTags": {
             "Part": "Furnace",
-            "Sensor": "Pressure"
+            "Sensor": "Pressure",
+            "host": "telegraf"
           }
         },
         {
@@ -181,7 +194,8 @@
           ],
           "influxTags": {
             "Part": "Picking",
-            "Sensor": "Temperature"
+            "Sensor": "Temperature",
+            "host": "telegraf"
           }
         },
         {
@@ -193,7 +207,8 @@
           ],
           "influxTags": {
             "Part": "Picking",
-            "Sensor": "PH"
+            "Sensor": "PH",
+            "host": "telegraf"
           }
         },
         {
@@ -205,7 +220,8 @@
           ],
           "influxTags": {
             "Part": "Picking",
-            "Sensor": "Temperature"
+            "Sensor": "Temperature",
+            "host": "telegraf"
           }
         },
         {
@@ -217,7 +233,8 @@
           ],
           "influxTags": {
             "Part": "Picking",
-            "Sensor": "Flow"
+            "Sensor": "Flow",
+            "host": "telegraf"
           }
         },
         {
@@ -231,7 +248,8 @@
           ],
           "influxTags": {
             "Part": "Rinsing",
-            "Sensor": "Temperature"
+            "Sensor": "Temperature",
+            "host": "telegraf"
           }
         },
         {
@@ -243,7 +261,8 @@
           ],
           "influxTags": {
             "Part": "Rinsing",
-            "Sensor": "Pressure"
+            "Sensor": "Pressure",
+            "host": "telegraf"
           }
         },
         {
@@ -255,7 +274,8 @@
           ],
           "influxTags": {
             "Part": "Takeup",
-            "Sensor": "Speed"
+            "Sensor": "Speed",
+            "host": "telegraf"
           }
         },
         {
@@ -267,7 +287,8 @@
           ],
           "influxTags": {
             "Part": "Takeup",
-            "Sensor": "Current"
+            "Sensor": "Current",
+            "host": "telegraf"
           }
         },
         {
@@ -279,7 +300,8 @@
           ],
           "influxTags": {
             "Part": "Takeup",
-            "Sensor": "Speed"
+            "Sensor": "Speed",
+            "host": "telegraf"
           }
         },
         {
@@ -291,7 +313,8 @@
           ],
           "influxTags": {
             "Part": "Takeup",
-            "Sensor": "Current"
+            "Sensor": "Current",
+            "host": "telegraf"
           }
         }
       ]
@@ -308,7 +331,7 @@
           "influxFields": [
             "PowerConsumption"
           ],
-          "influxTags": {}
+          "influxTags": {"host": "telegraf"}
         },
         {
           "name": "SimGasConsumption",
@@ -317,7 +340,7 @@
           "influxFields": [
             "GasConsumption"
           ],
-          "influxTags": {}
+          "influxTags": {"host": "telegraf"}
         }
       ]
     }
