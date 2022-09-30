@@ -32,35 +32,35 @@ CREATE TABLE [dbo].[SimulateMap](
 INSERT INTO [dbo].[SimulateMap]
            ([City],[Latitude],[Longitude],[OEE],[Volume],[timestamp],[Availability],[SafetyDayLost],[Training],[PowerConsumption],[GasConsumption],[Performance],[Quality],[SafetyRunningDays])
      VALUES
-           ('BeiJing',39.8949000000,116.3220000000,78.500,1000,'2022-08-25 00:00:00.000',2,98.000,0,60.000,345.000,23.400,67.000,94.000)
+           ('BeiJing',39.8949000000,116.3220000000,78.500,1000,'2022-08-25 00:00:00.000',98.000,0,60.000,345.000,23.400,67.000,94.000,654)
 INSERT INTO [dbo].[SimulateMap]
            ([City],[Latitude],[Longitude],[OEE],[Volume],[timestamp],[Availability],[SafetyDayLost],[Training],[PowerConsumption],[GasConsumption],[Performance],[Quality],[SafetyRunningDays])
      VALUES
-           ('ShangHai',31.2305200000,121.4736670000,67.300,800,'2022-08-25 00:00:00.000',8,78.000,0,56.700,305.800,15.700,65.000,81.000)
+           ('ShangHai',31.2305200000,121.4736670000,67.300,800,'2022-08-25 00:00:00.000',78.000,0,56.700,305.800,15.700,65.000,81.000,1090)
 INSERT INTO [dbo].[SimulateMap]
            ([City],[Latitude],[Longitude],[OEE],[Volume],[timestamp],[Availability],[SafetyDayLost],[Training],[PowerConsumption],[GasConsumption],[Performance],[Quality],[SafetyRunningDays])
      VALUES
-           ('ChengDu',30.5729600000,104.0663010000,83.900,1200,'2022-08-25 00:00:00.000',9,99.000,1,87.500,360.700,34.000,78.000,93.000)
+           ('ChengDu',30.5729600000,104.0663010000,83.900,1200,'2022-08-25 00:00:00.000',99.000,1,87.500,360.700,34.000,78.000,93.000,0)
 INSERT INTO [dbo].[SimulateMap]
            ([City],[Latitude],[Longitude],[OEE],[Volume],[timestamp],[Availability],[SafetyDayLost],[Training],[PowerConsumption],[GasConsumption],[Performance],[Quality],[SafetyRunningDays])
      VALUES
-           ('ChongQing',29.5637000000,106.5504830000,66.000,700,'2022-08-25 00:00:00.000',10,85.000,0,45.900,300.900,17.400,62.000,91.000)
+           ('ChongQing',29.5637000000,106.5504830000,66.000,700,'2022-08-25 00:00:00.000',85.000,0,45.900,300.900,17.400,62.000,91.000,356)
 INSERT INTO [dbo].[SimulateMap]
            ([City],[Latitude],[Longitude],[OEE],[Volume],[timestamp],[Availability],[SafetyDayLost],[Training],[PowerConsumption],[GasConsumption],[Performance],[Quality],[SafetyRunningDays])
      VALUES
-           ('JiNan',36.6520690000,117.1201280000,82.100,1467,'2022-08-25 00:00:00.000',11,99.000,0,23.500,401.200,30.800,83.000,97.000)
+           ('JiNan',36.6520690000,117.1201280000,82.100,1467,'2022-08-25 00:00:00.000',99.000,0,23.500,401.200,30.800,83.000,97.000,569)
 INSERT INTO [dbo].[SimulateMap]
            ([City],[Latitude],[Longitude],[OEE],[Volume],[timestamp],[Availability],[SafetyDayLost],[Training],[PowerConsumption],[GasConsumption],[Performance],[Quality],[SafetyRunningDays])
      VALUES
-           ('WeiHai',37.5133150000,122.1205190000,83.100,1578,'2022-08-25 00:00:00.000',12,99.000,0,65.900,411.000,28.800,85.000,99.000)
+           ('WeiHai',37.5133150000,122.1205190000,83.100,1578,'2022-08-25 00:00:00.000',99.000,0,65.900,411.000,28.800,85.000,99.000,204)
 INSERT INTO [dbo].[SimulateMap]
            ([City],[Latitude],[Longitude],[OEE],[Volume],[timestamp],[Availability],[SafetyDayLost],[Training],[PowerConsumption],[GasConsumption],[Performance],[Quality],[SafetyRunningDays])
      VALUES
-           ('ShenYang',41.6775760000,123.4646750000,65.700,632,'2022-08-25 00:00:00.00',13,82.500,1,56.800,200.800,13.800,67.000,91.000)
+           ('ShenYang',41.6775760000,123.4646750000,65.700,632,'2022-08-25 00:00:00.00',82.500,1,56.800,200.800,13.800,67.000,91.000,0)
 INSERT INTO [dbo].[SimulateMap]
            ([City],[Latitude],[Longitude],[OEE],[Volume],[timestamp],[Availability],[SafetyDayLost],[Training],[PowerConsumption],[GasConsumption],[Performance],[Quality],[SafetyRunningDays])
      VALUES
-           ('JiangYin',31.9216420000,120.2847940000,52.000,240,'2022-08-25 00:00:00.000',14,60.000,0,98.800,210.900,14.600,73.000,92.000)
+           ('JiangYin',31.9216420000,120.2847940000,52.000,240,'2022-08-25 00:00:00.000',60.000,0,98.800,210.900,14.600,73.000,92.000,109)
 
 GO
 --***********************************************

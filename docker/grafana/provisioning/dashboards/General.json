@@ -75,7 +75,7 @@
             {
               "targetBlank": false,
               "title": "details",
-              "url": "http://192.168.3.248:3000/d/f6bfC_gVk/new-dashboard?orgId=1&var-ID=${__data.fields.id}"
+              "url": "http://localhost:3000/d/f6bfC_gVk/ji-tuan-zong-lan?orgId=1&var-ID=${__data.fields.id}"
             }
           ],
           "mappings": [],
@@ -202,7 +202,7 @@
           "zoom": 4
         }
       },
-      "pluginVersion": "9.0.2",
+      "pluginVersion": "9.0.7",
       "targets": [
         {
           "alias": "",
@@ -232,8 +232,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-blue",
-                "value": null
+                "color": "super-light-blue"
               },
               {
                 "color": "red",
@@ -364,8 +363,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -387,8 +385,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -415,8 +412,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "semi-dark-orange",
-                      "value": null
+                      "color": "semi-dark-orange"
                     },
                     {
                       "color": "yellow",
@@ -447,8 +443,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "dark-red",
-                      "value": null
+                      "color": "dark-red"
                     },
                     {
                       "color": "dark-blue",
@@ -554,8 +549,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red",
-                "value": null
+                "color": "dark-red"
               },
               {
                 "color": "super-light-yellow",
@@ -653,8 +647,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "dark-red",
-                "value": null
+                "color": "dark-red"
               },
               {
                 "color": "light-yellow",
@@ -826,8 +819,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -896,8 +888,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -995,8 +986,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1089,8 +1079,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
