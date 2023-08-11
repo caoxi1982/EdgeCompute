@@ -1923,3 +1923,4 @@ BEGIN
 	SET @from_dt = DATEADD(MINUTE,@DateDifference,@from_dt)
 	SET @to_dt = DATEADD(MINUTE,@DateDifference,@to_dt)
 	--Add Stale Days Calculation
+END

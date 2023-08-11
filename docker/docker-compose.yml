@@ -35,7 +35,7 @@ services:
       bridge:
         ipv4_address: 172.16.0.4
   grafana:
-    image: grafana/grafana:9.0.7-ubuntu
+    image: grafana/grafana:8.5.21
     container_name: grafana
     restart: always
     user: "0" # needs to be `id -u` // alternatively chown the grafana/data dir to 472:472
@@ -48,6 +48,7 @@ services:
       #- GF_INSTALL_PLUGINS=${GF_INSTALL_PLUGINS}
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=rockwellautomation
+      - GF_AUTH_ANONYMOUS_ENABLED=true
     extra_hosts:
       - "influx:172.16.0.2"
     depends_on:
